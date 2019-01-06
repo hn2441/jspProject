@@ -5,113 +5,112 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class AdvDAO {
+public class ReviewDAO {
 	DBConnectionMgr pool;
 	Connection con;
 	
-	public AdvDAO() {
+	public ReviewDAO() {
 		pool = DBConnectionMgr.getInstance();
 	}
 	
 	//whn
-	public void insertAdv(AdvDTO dto){
+	public void insertReview(ReviewDTO dto){
 		PreparedStatement ps = null;
 		try {
 			con = pool.getConnection();
 
 			//3. SQL문 객체화
-			String sql = "INSERT INTO ADV VALUES(NULL,?,?,?,?,?);";
+			String sql = "INSERT INTO REVIEW VALUES(NULL,?,?,?,?,?,NULL);";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, dto.getSid());
-			ps.setString(2, dto.getTitle());
-			ps.setString(3, dto.getPrice());
+			ps.setString(1, dto.getMid());
+			ps.setString(2, dto.getSid());
+			ps.setInt(3, dto.getAdno());
 			ps.setString(4, dto.getContent());
-			ps.setString(5, dto.getImg());
+			ps.setInt(5, dto.getStarsc());
 			
 			//4. SQL문 실행 요청
 			ps.executeUpdate();
-			System.out.println("insertAdv sql문 요청 완료");
+			System.out.println("insertReview sql문 요청 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pool.freeConnection(con, ps);
 		}
 		
-	}//end insertAdv()
+	}//end insertReview()
 	
 	//whn
-	public void updateAdv(AdvDTO dto){
+	public void updateReview(ReviewDTO dto){
 		PreparedStatement ps = null;
 		try {
 			con = pool.getConnection();
 			
 			//3.sql문 객체화
-			String sql = "UPDATE ADV SET TITLE=?, PRICE=?, CONTENT=?, IMG=? WHERE NO=?;";
+			String sql = "UPDATE REVIEW SET CONTENT=?, STARSC=?, WHERE NO=?;";
 			ps = con.prepareStatement(sql);
-			ps.setInt(5, dto.getNo());
-			ps.setString(1, dto.getTitle());
-			ps.setString(2, dto.getPrice());
-			ps.setString(3, dto.getContent());
-			ps.setString(4, dto.getImg());
+			ps.setInt(3, dto.getNo());
+			ps.setString(1, dto.getContent());
+			ps.setInt(2, dto.getStarsc());
 			
 			//4.sql문 실행요청
 			ps.executeUpdate();
-			System.out.println("updateAdv sql문 요청 완료");
+			System.out.println("updateReview sql문 요청 완료");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			pool.freeConnection(con, ps);
 		}
-	}//end updateAdv
+	}//end updateReview
 	
 	//whn
-	public void deleteAdv(int no) {
+	public void deleteReview(int no) {
 		PreparedStatement ps =null;
 		try {
 			con = pool.getConnection();
 			
 			//3.sql문 객체화
-			String sql = "DELETE FROM ADV WHERE NO=?;";
+			String sql = "DELETE FROM REVIEW WHERE NO=?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, no);
 			
 			//4.sql문 실행요청
 			ps.executeUpdate();
-			System.out.println("deleteAdv sql문 요청 완료");
+			System.out.println("deleteReview sql문 요청 완료");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			pool.freeConnection(con, ps);
 		}
-	}//end deleteAdv()
+	}//end deleteReview()
 	
 	//whn
-	public ArrayList<AdvDTO> selectAllAdv(String input) {
+	public ArrayList<ReviewDTO> selectAllReview(String input) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ArrayList<AdvDTO> list = null;
-		AdvDTO dto = null;
+		ArrayList<ReviewDTO> list = null;
+		ReviewDTO dto = null;
 		try {
 			con = pool.getConnection();
 			
 			//3. sql문 객체화
-			String sql="SELECT * FROM ADV;";
+			String sql="SELECT * FROM REVIEW;";
 			ps = con.prepareStatement(sql);
 			
 			//4. sql문 실행 요청
 			rs = ps.executeQuery();
 			list = new ArrayList<>();
 			while(rs.next()) {
-				dto = new AdvDTO();
+				dto = new ReviewDTO();
 				
 				dto.setNo(rs.getInt(1));
-				dto.setSid(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setPrice(rs.getString(4));
+				dto.setMid(rs.getString(2));
+				dto.setSid(rs.getString(3));
+				dto.setAdno(rs.getInt(4));
 				dto.setContent(rs.getString(5));
-				dto.setImg(rs.getString(6));
+				dto.setStarsc(rs.getInt(6));
+				dto.setDate(rs.getString(7));
 				
 				list.add(dto);
 			}
@@ -122,5 +121,5 @@ public class AdvDAO {
 		}
 		
 		return list;
-	}//end selectAllAdv()
+	}//end selectAllReview()
 }

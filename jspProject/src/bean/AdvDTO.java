@@ -30,10 +30,10 @@ public class AdvDTO {
 		this.title = title;
 	}
 	
-	public String getprice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setprice(String price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	

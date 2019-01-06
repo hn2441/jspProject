@@ -1,14 +1,21 @@
 package bean;
 
 public class ReviewDTO {
-//	private int no;
+	private int no;
 	private String mid;
 	private String sid;
-	private String adno;
+	private int adno;
 	private String content;
 	private int starsc;
-//	private String date;
+	private String date;
 	
+	
+	int getNo() {
+		return no;
+	}
+	void setNo(int no) {
+		this.no = no;
+	}
 	public String getMid() {
 		return mid;
 	}
@@ -23,10 +30,10 @@ public class ReviewDTO {
 		this.sid = sid;
 	}
 	
-	public String getAdno() {
+	int getAdno() {
 		return adno;
 	}
-	public void setAdno(String adno) {
+	void setAdno(int adno) {
 		this.adno = adno;
 	}
 	
@@ -42,6 +49,12 @@ public class ReviewDTO {
 	}
 	public void setStarsc(int starsc) {
 		this.starsc = starsc;
+	}
+	String getDate() {
+		return date;
+	}
+	void setDate(String date) {
+		this.date = date;
 	}
 	
 	
