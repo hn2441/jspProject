@@ -1,0 +1,22 @@
+package bean;
+
+public class CartDTO {
+	private String mid;
+	private int adno;
+//	private String date;
+	
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	
+	public int getAdno() {
+		return adno;
+	}
+	public void setAdno(int adno) {
+		this.adno = adno;
+	}
+	
+}
