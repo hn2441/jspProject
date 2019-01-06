@@ -28,6 +28,5 @@ public class AdvDAO {
 		ps.executeUpdate();
 		System.out.println("sql문 요청 완료");
 		pool.freeConnection(con, ps);
-		
 	}
 }
