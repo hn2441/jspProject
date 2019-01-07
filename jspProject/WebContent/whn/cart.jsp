@@ -10,9 +10,9 @@
 <head>
 <title>장바구니</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="assets/css/main.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body class="no-sidebar is-preload">
 	<div id="page-wrapper">
@@ -76,7 +76,7 @@
 										<h2>찜1</h2>
 									</header>
 									<a href="#" class="image featured"><img
-										src="images/pic05.jpg" alt="" /></a>
+										src="../images/pic05.jpg" alt="" /></a>
 									<p>Rutrum bibendum. Proin pellentesque diam non ligula
 										commodo tempor. Vivamus eget urna nibh. Curabitur non
 										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
@@ -89,7 +89,7 @@
 										<h2>찜2</h2>
 									</header>
 									<a href="#" class="image featured"><img
-										src="images/pic06.jpg" alt="" /></a>
+										src="../images/pic06.jpg" alt="" /></a>
 									<p>Rutrum bibendum. Proin pellentesque diam non ligula
 										commodo tempor. Vivamus eget urna nibh. Curabitur non
 										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
@@ -102,7 +102,7 @@
 										<h2>Magna pulvinar tempus</h2>
 									</header>
 									<a href="#" class="image featured"><img
-										src="images/pic05.jpg" alt="" /></a>
+										src="../images/pic05.jpg" alt="" /></a>
 									<p>Rutrum bibendum. Proin pellentesque diam non ligula
 										commodo tempor. Vivamus eget urna nibh. Curabitur non
 										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
@@ -115,7 +115,7 @@
 										<h2>Magna pulvinar tempus</h2>
 									</header>
 									<a href="#" class="image featured"><img
-										src="images/pic06.jpg" alt="" /></a>
+										src="../images/pic06.jpg" alt="" /></a>
 									<p>Rutrum bibendum. Proin pellentesque diam non ligula
 										commodo tempor. Vivamus eget urna nibh. Curabitur non
 										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
@@ -128,7 +128,7 @@
 										<h2>Magna pulvinar tempus</h2>
 									</header>
 									<a href="#" class="image featured"><img
-										src="images/pic05.jpg" alt="" /></a>
+										src="../images/pic05.jpg" alt="" /></a>
 									<p>Rutrum bibendum. Proin pellentesque diam non ligula
 										commodo tempor. Vivamus eget urna nibh. Curabitur non
 										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
@@ -141,7 +141,7 @@
 										<h2>Magna pulvinar tempus</h2>
 									</header>
 									<a href="#" class="image featured"><img
-										src="images/pic06.jpg" alt="" /></a>
+										src="../images/pic06.jpg" alt="" /></a>
 									<p>Rutrum bibendum. Proin pellentesque diam non ligula
 										commodo tempor. Vivamus eget urna nibh. Curabitur non
 										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
@@ -163,7 +163,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="images/pic02.jpg" alt="" /></a>
+								src="../images/pic02.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Aliquam diam consequat</a>
 							</h3>
@@ -178,7 +178,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="images/pic03.jpg" alt="" /></a>
+								src="../images/pic03.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Nisl adipiscing sed lorem</a>
 							</h3>
@@ -193,7 +193,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="images/pic04.jpg" alt="" /></a>
+								src="../images/pic04.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Mattis tempus lorem</a>
 							</h3>

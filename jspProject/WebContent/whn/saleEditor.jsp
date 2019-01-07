@@ -8,19 +8,12 @@
 -->
 <html>
 <head>
-<title>리뷰페이지</title>
+<title>판매 에디터 페이지 입니다.</title>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
 <style type="text/css">
-#crud1 {
-	text-decoration: none;
-	float: right;
-	font-size: 10px;
-	text-align: right;
-	display:
-}
-
 #heart {
 	position: relative;
 	width: 25px;
@@ -48,8 +41,6 @@
 
 #heart:hover {
 	background: #fcc8c4;
-	width: 30px;
-	height: 27px;
 }
 </style>
 <link rel="stylesheet" href="assets/css/main.css" />
@@ -107,46 +98,43 @@
 						<div id="content">
 							<article class="box post">
 								<header class="style1">
-									<h2>리뷰 페이지 제목</h2>
-									<p>리뷰 페이지</p>
+									<textarea rows="1px" cols="95px">
+										제목
+									</textarea>		
+
+									<div class="row gtr-150">
+										<div class="col-6 col-12-small">
+											<table id=editor page>
+												<tr>
+													<td>
+														<textarea rows="1px" cols="45px">가격	</textarea>
+													</td>
+													<td>
+														<textarea rows="1px" cols="45px">가격	</textarea>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<textarea rows="5px" cols="45px">원하시는 내용을 입력해주세요.
+														</textarea>
+													</td>
+													<td>
+														<textarea rows="5px" cols="45px">원하시는 내용을 입력해주세요.
+														</textarea>														
+													</td>
+												</tr>
+												<tr>
+													<td colspan="2">
+														<textarea rows="10px" cols="95px">
+															원하시는 내용을 입력해주세요.
+														</textarea>														
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
 								</header>
-								<div>
-									<ul class="style2">
-										<li>
-											<article class="box post-excerpt">
-												<a href="#" class="image left"><img
-													src="../images/pic08.jpg" alt="" /></a>
-												<h3>
-													<a href="#">리뷰1</a>
-												</h3>
-												<p>Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-										<li>
-											<article class="box post-excerpt">
-												<a href="#" class="image left"><img
-													src="../images/pic09.jpg" alt="" /></a>
-												<h3>
-													<a href="#">리뷰2</a>
-												</h3>
-												<p>Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-										<li>
-											<article class="box post-excerpt">
-												<a href="#" class="image left"><img
-													src="../images/pic10.jpg" alt="" /></a>
-												<h3>
-													<a href="#">리뷰3</a>
-												</h3>
-												<p>Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-									</ul>
-								</div>
+
 							</article>
 						</div>
 

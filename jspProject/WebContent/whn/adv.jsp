@@ -9,9 +9,9 @@
 <html>
 <head>
 <title>판매 페이지 입니다.</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
 <style type="text/css">
 #heart {
 	position: relative;
@@ -108,7 +108,7 @@
 													<h2>가격정보 1</h2>
 												</header>
 												<a href="#" class="image featured"><img
-													src="images/pic05.jpg" alt="" /></a>
+													src="../images/pic05.jpg" alt="" /></a>
 												<p>내용.</p>
 
 											</section>
@@ -119,7 +119,7 @@
 													<h2>가격정보 2</h2>
 												</header>
 												<a href="#" class="image featured"><img
-													src="images/pic06.jpg" alt="" /></a>
+													src="../images/pic06.jpg" alt="" /></a>
 												<p>내용</p>
 
 											</section>
@@ -127,7 +127,7 @@
 									</div>
 								</header>
 								<a href="#" class="image featured"> <img
-									src="images/pic01.jpg" alt="" /> 판매자 게시판으로 넘어갑니다.
+									src="../images/pic01.jpg" alt="" /> 판매자 게시판으로 넘어갑니다.
 								</a>
 								<p>Fringilla nisl. Donec accumsan interdum nisi, quis
 									tincidunt felis sagittis eget. odio eleifend. Duis commodo
@@ -152,7 +152,7 @@
 										<li>
 											<article class="box post-excerpt">
 												<a href="#" class="image left"><img
-													src="images/pic08.jpg" alt="" /></a>
+													src="../images/pic08.jpg" alt="" /></a>
 												<h3>
 													<a href="#">리뷰1</a>
 												</h3>
@@ -163,7 +163,7 @@
 										<li>
 											<article class="box post-excerpt">
 												<a href="#" class="image left"><img
-													src="images/pic09.jpg" alt="" /></a>
+													src="../images/pic09.jpg" alt="" /></a>
 												<h3>
 													<a href="#">리뷰2</a>
 												</h3>
@@ -174,7 +174,7 @@
 										<li>
 											<article class="box post-excerpt">
 												<a href="#" class="image left"><img
-													src="images/pic10.jpg" alt="" /></a>
+													src="../images/pic10.jpg" alt="" /></a>
 												<h3>
 													<a href="#">리뷰3</a>
 												</h3>
@@ -204,7 +204,7 @@
 									<li>
 										<article class="box post-excerpt">
 											<a href="#" class="image left"><img
-												src="images/pic08.jpg" alt="" /></a>
+												src="../images/pic08.jpg" alt="" /></a>
 											<h3>
 												<a href="#">닉네임</a>
 											</h3>
@@ -247,7 +247,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="images/pic02.jpg" alt="" /></a>
+								src="../images/pic02.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Aliquam diam consequat</a>
 							</h3>
@@ -262,7 +262,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="images/pic03.jpg" alt="" /></a>
+								src="../images/pic03.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Nisl adipiscing sed lorem</a>
 							</h3>
@@ -277,7 +277,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="images/pic04.jpg" alt="" /></a>
+								src="../images/pic04.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Mattis tempus lorem</a>
 							</h3>
@@ -398,4 +398,3 @@
 
 </body>
 </html>
-l>
