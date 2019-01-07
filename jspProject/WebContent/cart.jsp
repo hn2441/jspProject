@@ -8,53 +8,13 @@
 -->
 <html>
 <head>
-<title>리뷰페이지</title>
+<title>장바구니</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<style type="text/css">
-#crud1 {
-	text-decoration: none;
-	float: right;
-	font-size: 10px;
-	text-align: right;
-	display:
-}
-
-#heart {
-	position: relative;
-	width: 25px;
-	height: 22.5px;
-}
-
-#heart:before, #heart:after {
-	position: absolute;
-	content: "";
-	left: 12.5px;
-	top: 0px;
-	width: 12.5px;
-	height: 20px;
-	background: #f98780;
-	border-radius: 12.5px 12.5px 0 0;
-	transform: rotate(-45deg);
-	transform-origin: 0 100%
-}
-
-#heart:after {
-	left: 0;
-	transform: rotate(45deg);
-	transform-origin: 100% 100%;
-}
-
-#heart:hover {
-	background: #fcc8c4;
-	width: 30px;
-	height: 27px;
-}
-</style>
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body class="right-sidebar is-preload">
+<body class="no-sidebar is-preload">
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -63,9 +23,9 @@
 			<!-- Logo -->
 			<div id="logo">
 				<h1>
-					<a href="index.html">상단 큰글씨</a>
+					<a href="index.html">장바구니</a>
 				</h1>
-				<p>상단 작은글씨</p>
+				<p>장바구니</p>
 			</div>
 
 			<!-- Nav -->
@@ -88,118 +48,112 @@
 							<li><a href="#">Nisl tempus</a></li>
 						</ul></li>
 					<li><a href="left-sidebar.html">Left Sidebar</a></li>
-					<li class="current"><a href="right-sidebar.html">Right
-							Sidebar</a></li>
-					<li><a href="no-sidebar.html">No Sidebar</a></li>
+					<li><a href="right-sidebar.html">Right Sidebar</a></li>
+					<li class="current"><a href="no-sidebar.html">No Sidebar</a></li>
 				</ul>
 			</nav>
 
 		</section>
 
 		<!-- Main -->
-		<section id="main" class="wrapper style2">
-			<div class="title">Right Sidebar</div>
+		<div id="main" class="wrapper style2">
+			<div class="title">No Sidebar</div>
 			<div class="container">
-				<div class="row gtr-150">
-					<div class="col-8 col-12-medium">
 
-						<!-- Content -->
-						<div id="content">
-							<article class="box post">
-								<header class="style1">
-									<h2>리뷰 페이지 제목</h2>
-									<p>리뷰 페이지</p>
-								</header>
-								<div>
-									<ul class="style2">
-										<li>
-											<article class="box post-excerpt">
-												<a href="#" class="image left"><img
-													src="images/pic08.jpg" alt="" /></a>
-												<h3>
-													<a href="#">리뷰1</a>
-												</h3>
-												<p>Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-										<li>
-											<article class="box post-excerpt">
-												<a href="#" class="image left"><img
-													src="images/pic09.jpg" alt="" /></a>
-												<h3>
-													<a href="#">리뷰2</a>
-												</h3>
-												<p>Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-										<li>
-											<article class="box post-excerpt">
-												<a href="#" class="image left"><img
-													src="images/pic10.jpg" alt="" /></a>
-												<h3>
-													<a href="#">리뷰3</a>
-												</h3>
-												<p>Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-									</ul>
-								</div>
-							</article>
+				<!-- Content -->
+				<div id="content">
+					<article class="box post">
+						<header class="style1">
+							<h2>
+								ooo님의 찜하기 내역<br class="mobile-hide" />
+							</h2>
+							<p>Tempus feugiat veroeros sed nullam dolore</p>
+						</header>
+						<div class="row gtr-150">
+							<div class="col-6 col-12-small">
+								<section class="box">
+									<header>
+										<h2>찜1</h2>
+									</header>
+									<a href="#" class="image featured"><img
+										src="images/pic05.jpg" alt="" /></a>
+									<p>Rutrum bibendum. Proin pellentesque diam non ligula
+										commodo tempor. Vivamus eget urna nibh. Curabitur non
+										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
+									<a href="#" class="button style1">More</a>
+								</section>
+							</div>
+							<div class="col-6 col-12-small">
+								<section class="box">
+									<header>
+										<h2>찜2</h2>
+									</header>
+									<a href="#" class="image featured"><img
+										src="images/pic06.jpg" alt="" /></a>
+									<p>Rutrum bibendum. Proin pellentesque diam non ligula
+										commodo tempor. Vivamus eget urna nibh. Curabitur non
+										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
+									<a href="#" class="button style1">More</a>
+								</section>
+							</div>
+							<div class="col-6 col-12-small">
+								<section class="box">
+									<header>
+										<h2>Magna pulvinar tempus</h2>
+									</header>
+									<a href="#" class="image featured"><img
+										src="images/pic05.jpg" alt="" /></a>
+									<p>Rutrum bibendum. Proin pellentesque diam non ligula
+										commodo tempor. Vivamus eget urna nibh. Curabitur non
+										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
+									<a href="#" class="button style1">More</a>
+								</section>
+							</div>
+							<div class="col-6 col-12-small">
+								<section class="box">
+									<header>
+										<h2>Magna pulvinar tempus</h2>
+									</header>
+									<a href="#" class="image featured"><img
+										src="images/pic06.jpg" alt="" /></a>
+									<p>Rutrum bibendum. Proin pellentesque diam non ligula
+										commodo tempor. Vivamus eget urna nibh. Curabitur non
+										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
+									<a href="#" class="button style1">More</a>
+								</section>
+							</div>
+														<div class="col-6 col-12-small">
+								<section class="box">
+									<header>
+										<h2>Magna pulvinar tempus</h2>
+									</header>
+									<a href="#" class="image featured"><img
+										src="images/pic05.jpg" alt="" /></a>
+									<p>Rutrum bibendum. Proin pellentesque diam non ligula
+										commodo tempor. Vivamus eget urna nibh. Curabitur non
+										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
+									<a href="#" class="button style1">More</a>
+								</section>
+							</div>
+							<div class="col-6 col-12-small">
+								<section class="box">
+									<header>
+										<h2>Magna pulvinar tempus</h2>
+									</header>
+									<a href="#" class="image featured"><img
+										src="images/pic06.jpg" alt="" /></a>
+									<p>Rutrum bibendum. Proin pellentesque diam non ligula
+										commodo tempor. Vivamus eget urna nibh. Curabitur non
+										fringilla nisl. Donec accumsan interdum nisi, quis tempus.</p>
+									<a href="#" class="button style1">More</a>
+								</section>
+							</div>
 						</div>
-
-					</div>
-					<div class="col-4 col-12-medium">
-
-						<!-- Sidebar -->
-						<div id="sidebar">
-							<section class="box">
-								<header>
-									<h2>네임카드</h2>
-									<a href="#" id="heart"></a>
-								</header>
-							</section>
-							<section class="box">
-								<ul class="style2">
-									<li>
-										<article class="box post-excerpt">
-											<a href="#" class="image left"><img
-												src="images/pic08.jpg" alt="" /></a>
-											<h3>
-												<a href="#">닉네임</a>
-											</h3>
-											<p>닉네임</p>
-										</article>
-									</li>
-								</ul>
-								<br> <a href="#" class="button style1">주문하기</a>
-							</section>
-							<section class="box">
-								<header>
-									<h2>그 외 링크</h2>
-								</header>
-								<ul class="style3">
-									<li><a href="#">Nulla iaculis egestas varius</a></li>
-									<li><a href="#">Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
-									<li><a href="#">Turpis vel leo accumsan aliquet</a></li>
-									<li><a href="#">Dapibus mi fermentum fusce non</a></li>
-									<li><a href="#">Arcu laoreet sapien tempus</a></li>
-									<li><a href="#">Nulla iaculis egestas varius</a></li>
-									<li><a href="#">Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
-								</ul>
-							</section>
-						</div>
-
-					</div>
+					</article>
 				</div>
+
 			</div>
-		</section>
+		</div>
 
 		<!-- Highlights -->
 		<section id="highlights" class="wrapper style3">
@@ -360,3 +314,4 @@
 
 </body>
 </html>
+

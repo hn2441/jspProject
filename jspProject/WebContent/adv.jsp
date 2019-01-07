@@ -13,7 +13,32 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <style type="text/css">
-	
+#heart {
+	position: relative;
+	width: 25px;
+	height: 22.5px;
+}
+#heart:before, #heart:after {
+	position: absolute;
+	content: "";
+	left: 12.5px;
+	top: 0px;
+	width: 12.5px;
+	height: 20px;
+	background: #f98780;
+	border-radius: 12.5px 12.5px 0 0;
+	transform: rotate(-45deg);
+	transform-origin: 0 100%
+}
+#heart:after {
+	left: 0;
+	transform: rotate(45deg);
+	transform-origin: 100% 100%;
+}
+#heart:hover {
+	background: #fcc8c4;
+}
+
 </style>
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -372,4 +397,5 @@
 	<script src="assets/js/main.js"></script>
 
 </body>
-</html>l>
+</html>
+l>
