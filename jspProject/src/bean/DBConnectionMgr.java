@@ -29,9 +29,9 @@ import java.util.Properties;
 import java.util.Vector;
 public class DBConnectionMgr {
     private Vector connections = new Vector(10);
-    private String _driver = "com.mysql.jdbc.Driver",
-    _url = "jdbc:mysql://127.0.0.1:3306/book",
-    _user = "root",
+    private String _driver = "org.postgresql.Driver",
+    _url = "jdbc:postgresql://127.0.0.1:5432/jspproject",
+    _user = "postgre",
     _password = "1234";
     private boolean _traceOn = false;
     private boolean initialized = false;
