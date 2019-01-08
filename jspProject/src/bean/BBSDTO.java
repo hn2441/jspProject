@@ -10,6 +10,7 @@ public class BBSDTO {
 	private String date; //날짜
 	private int view; //조회수
 	
+	
 	public String getId2() {
 		return id2;
 	}
