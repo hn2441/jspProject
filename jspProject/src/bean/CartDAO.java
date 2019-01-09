@@ -20,7 +20,7 @@ public class CartDAO {
 			con = pool.getConnection();
 
 			//3. SQL문 객체화
-			String sql = "INSERT INTO CART VALUES(?,?,NULL);";
+			String sql = "INSERT INTO CART(mid,adno) VALUES(?,?);";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getMid());
 			ps.setInt(2, dto.getAdno());

@@ -98,79 +98,43 @@
 						<div id="content">
 							<article class="box post">
 								<header class="style1">
-								</header>
+									<textarea rows="1px" cols="95px">
+										제목
+									</textarea>		
+
 									<div class="row gtr-150">
 										<div class="col-6 col-12-small">
-											<form>
-											<table>
+											<table id=editor page>
 												<tr>
-													<td style="width: 20px;">제</td>
-													<td style="width: 20px;">　</td>
-													<td style="width: 20px;">　</td>
-													<td style="width: 20px;">목</td>
-													<td style="width: 20px;"></td>
-													<td colspan="3"><input type="text" id="" style="width: 605px;"></td>
-												</tr>
-												<tr>
-													<td colspan="6" style="height : 20px"></td>
-												</tr>
-												<tr>
-													<td style="width: 20px;">가</td>
-													<td style="width: 20px;">　</td>
-													<td style="width: 20px;">　</td>
-													<td style="width: 20px;">격</td>
-													<td style="width: 20px;"></td>
-													<td><input type="text" style="width: 300px"></td>
-													<td style="width: 5px;"></td>
-													<td><input type="text" style="width: 300px"></td>
-												</tr>
-												<tr>
-													<td colspan="6" style="height : 5px"></td>
-												</tr>
-												<tr>
-													<td style="width: 20px;">내</td>
-													<td style="width: 20px;">　</td>
-													<td style="width: 20px;">　</td>
-													<td style="width: 20px;">용</td>
-													<td style="width: 20px;"></td>
-													<td><input type="text" style="width: 300px; height: 100px; "></td>
-													<td style="width: 5px;"></td>
-													<td><input type="text" style="width: 300px; height: 100px;"></td>
-												</tr>
-												<tr>
-													<td colspan="8" style="height : 20px"></td>
-												</tr>
-												<tr>
-													<td style="width: 20px;">상</td>
-													<td style="width: 20px;">세</td>
-													<td style="width: 20px;">내</td>
-													<td style="width: 20px;">용</td>
-													<td style="width: 10px;"></td>
-													<td colspan="3"><input type="text" style="width: 605px; height: 200px;"></td>
-												</tr>
-												<tr>
-													<td colspan="8" style="height : 50px"></td>
-												</tr>
-												<tr>
-													<td colspan="8">
-														<div align="center" style="width: 700px;">
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															<button class="button style1">입력 / 수정</button>
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															<input type="reset" class="button style1">
-														</div>
+													<td>
+														<textarea rows="1px" cols="45px">가격	</textarea>
 													</td>
-													
+													<td>
+														<textarea rows="1px" cols="45px">가격	</textarea>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<textarea rows="5px" cols="45px">원하시는 내용을 입력해주세요.
+														</textarea>
+													</td>
+													<td>
+														<textarea rows="5px" cols="45px">원하시는 내용을 입력해주세요.
+														</textarea>														
+													</td>
+												</tr>
+												<tr>
+													<td colspan="2">
+														<textarea rows="10px" cols="95px">
+															원하시는 내용을 입력해주세요.
+														</textarea>														
+													</td>
 												</tr>
 											</table>
-											</form>
 										</div>
 									</div>
+								</header>
+
 							</article>
 						</div>
 

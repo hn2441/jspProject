@@ -20,7 +20,7 @@ public class AdvDAO {
 			con = pool.getConnection();
 
 			//3. SQL문 객체화
-			String sql = "INSERT INTO ADV VALUES(NULL,?,?,?,?,?);";
+			String sql = "INSERT INTO ADV(sid,title,price,cotnet,img) VALUES(?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getSid());
 			ps.setString(2, dto.getTitle());

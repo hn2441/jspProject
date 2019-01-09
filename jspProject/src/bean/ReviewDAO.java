@@ -20,7 +20,7 @@ public class ReviewDAO {
 			con = pool.getConnection();
 
 			//3. SQL문 객체화
-			String sql = "INSERT INTO REVIEW VALUES(NULL,?,?,?,?,?,NULL);";
+			String sql = "INSERT INTO REVIEW (mid,sid,adno,content,starsc) VALUES(?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getMid());
 			ps.setString(2, dto.getSid());
@@ -84,6 +84,44 @@ public class ReviewDAO {
 			pool.freeConnection(con, ps);
 		}
 	}//end deleteReview()
+	
+	//whn
+	public ArrayList<ReviewDTO> selectThreeReview(String input) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<ReviewDTO> list = null;
+		ReviewDTO dto = null;
+		try {
+			con = pool.getConnection();
+			
+			//3. sql문 객체화
+			String sql="SELECT * FROM REVIEW;";
+			ps = con.prepareStatement(sql);
+			
+			//4. sql문 실행 요청
+			rs = ps.executeQuery();
+			list = new ArrayList<>();
+			while(rs.next()) {
+				dto = new ReviewDTO();
+				
+				dto.setNo(rs.getInt(1));
+				dto.setMid(rs.getString(2));
+				dto.setSid(rs.getString(3));
+				dto.setAdno(rs.getInt(4));
+				dto.setContent(rs.getString(5));
+				dto.setStarsc(rs.getInt(6));
+				dto.setDate(rs.getString(7));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			pool.freeConnection(con, ps, rs);
+		}
+		
+		return list;
+	}//end selectAllReview()
 	
 	//whn
 	public ArrayList<ReviewDTO> selectAllReview(String input) {
