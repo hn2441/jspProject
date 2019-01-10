@@ -1,3 +1,8 @@
+<%@page import="bean.ReviewDAO"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -55,6 +60,18 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body class="right-sidebar is-preload">
+<%
+	String id = (String)session.getAttribute("id"); //세션에 올라가있는 지금 로그인 한 아이디 가져오기
+	session.getAttribute("adno"); //리뷰만 있는 페이지로 넘어와도 전에 있던 글 정보가 필요함
+	session.getAttribute("sid"); //리뷰만 있는 페이지로 넘어와도 전에 있던 글 정보가 필요함
+	
+	//전체 리뷰 갯수 가져와서 갯수 받아오는 부분
+/* 	ReviewDAO dao = new ReviewDAO();
+	int count = dao.selectAllCounter(); */
+	int count = 14;
+	
+
+%>
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -112,39 +129,54 @@
 								</header>
 								<div>
 									<ul class="style2">
-										<li>
+									<%
+										for(int i=count;i>0;i--){
+	
+											
+											if(i%3==0){
+										%><li>
 											<article class="box post-excerpt">
 												<a href="#" class="image left"><img
 													src="../images/pic08.jpg" alt="" /></a>
 												<h3>
-													<a href="#">리뷰1</a>
+													<a href="#"><%=i %>번 리뷰</a>
+													
 												</h3>
 												<p>Duis odio diam, luctus et vulputate vitae, vehicula
 													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
 											</article>
 										</li>
+										<% 
+											}else if(i%3==1){
+										%>
 										<li>
 											<article class="box post-excerpt">
 												<a href="#" class="image left"><img
 													src="../images/pic09.jpg" alt="" /></a>
 												<h3>
-													<a href="#">리뷰2</a>
+													<a href="#"><%=i %></a>
 												</h3>
 												<p>Duis odio diam, luctus et vulputate vitae, vehicula
 													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
 											</article>
 										</li>
+										<% 
+											}else if(i%3==2){
+										%>
 										<li>
 											<article class="box post-excerpt">
 												<a href="#" class="image left"><img
 													src="../images/pic10.jpg" alt="" /></a>
 												<h3>
-													<a href="#">리뷰3</a>
+													<a href="#"><%=i %></a>
 												</h3>
 												<p>Duis odio diam, luctus et vulputate vitae, vehicula
 													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
 											</article>
-										</li>
+										</li><%
+										}
+									}
+									%>
 									</ul>
 								</div>
 							</article>

@@ -8,44 +8,13 @@
 -->
 <html>
 <head>
-<title>판매 에디터 페이지 입니다.</title>
+<title>리뷰 에디터 페이지 입니다.</title>
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
-<style type="text/css">
-#heart {
-	position: relative;
-	width: 25px;
-	height: 22.5px;
-}
-
-#heart:before, #heart:after {
-	position: absolute;
-	content: "";
-	left: 12.5px;
-	top: 0px;
-	width: 12.5px;
-	height: 20px;
-	background: #f98780;
-	border-radius: 12.5px 12.5px 0 0;
-	transform: rotate(-45deg);
-	transform-origin: 0 100%
-}
-
-#heart:after {
-	left: 0;
-	transform: rotate(45deg);
-	transform-origin: 100% 100%;
-}
-
-#heart:hover {
-	background: #fcc8c4;
-}
-</style>
-<link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body class="right-sidebar is-preload">
+<body class="no-sidebar is-preload">
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -54,9 +23,9 @@
 			<!-- Logo -->
 			<div id="logo">
 				<h1>
-					<a href="index.html">상단 큰글씨</a>
+					<a href="index.html">리뷰 에디터 페이지</a>
 				</h1>
-				<p>상단 작은글씨</p>
+				<p>A free responsive site template by HTML5 UP</p>
 			</div>
 
 			<!-- Nav -->
@@ -79,115 +48,76 @@
 							<li><a href="#">Nisl tempus</a></li>
 						</ul></li>
 					<li><a href="left-sidebar.html">Left Sidebar</a></li>
-					<li class="current"><a href="right-sidebar.html">Right
-							Sidebar</a></li>
-					<li><a href="no-sidebar.html">No Sidebar</a></li>
+					<li><a href="right-sidebar.html">Right Sidebar</a></li>
+					<li class="current"><a href="no-sidebar.html">No Sidebar</a></li>
 				</ul>
 			</nav>
 
 		</section>
 
 		<!-- Main -->
-		<section id="main" class="wrapper style2">
-			<div class="title">Right Sidebar</div>
+		<div id="main" class="wrapper style2">
+			<div class="title">No Sidebar</div>
 			<div class="container">
-				<div class="row gtr-150">
-					<div class="col-8 col-12-medium">
 
-						<!-- Content -->
-						<div id="content">
-							<article class="box post">
-								<header class="style1">
-									<textarea rows="1px" cols="95px">
-										제목
-									</textarea>		
+				<!-- Content -->
+				<div id="content">
+					<article class="box post">
+						<header class="style1"> </header>
+						<div align="center">
+							<form>
+								<table>
+									<tr>
+										<td style="width: 150px;"></td>
+										<td style="width: 20px;">판</td>
+										<td style="width: 20px;">매</td>
+										<td style="width: 20px;">글</td>
+										<td style="width: 20px;">제</td>
+										<td style="width: 20px;">목</td>
+										<td colspan="4"><input type="text" name="title" readonly="readonly"
+											style="width: 600px;"></td>
+									</tr>
+									<tr>
+										<td colspan="8" style="height: 10px"></td>
+									</tr>
+									<tr>
+										<td style="width: 150px;"></td>
+										<td style="width: 20px;">리</td>
+										<td style="width: 20px;"></td>
+										<td style="width: 20px;"></td>
+										<td style="width: 20px;"></td>
+										<td style="width: 15px;">뷰</td>
+										<td colspan="4"><input type="text" name="content"
+											style="width: 600px; height: 200px;"></td>
+									</tr>
+									<tr>
+										<td colspan="8" style="height: 50px"></td>
+									</tr>
+									<tr>
+										<td style="width: 150px;"></td>
+										<td colspan="8">
+											<div align="center" style="width: 700px;">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<button class="button style1">입력 / 수정</button>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+												<input type="reset"	class="button style1">
+											</div>
+										</td>
 
-									<div class="row gtr-150">
-										<div class="col-6 col-12-small">
-											<table id=editor page>
-												<tr>
-													<td>
-														<textarea rows="1px" cols="45px">가격	</textarea>
-													</td>
-													<td>
-														<textarea rows="1px" cols="45px">가격	</textarea>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<textarea rows="5px" cols="45px">원하시는 내용을 입력해주세요.
-														</textarea>
-													</td>
-													<td>
-														<textarea rows="5px" cols="45px">원하시는 내용을 입력해주세요.
-														</textarea>														
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2">
-														<textarea rows="10px" cols="95px">
-															원하시는 내용을 입력해주세요.
-														</textarea>														
-													</td>
-												</tr>
-											</table>
-										</div>
-									</div>
-								</header>
-
-							</article>
+									</tr>
+								</table>
+							</form>
 						</div>
-
-					</div>
-					<div class="col-4 col-12-medium">
-
-						<!-- Sidebar -->
-						<div id="sidebar">
-							<section class="box">
-								<header>
-									<h2>네임카드</h2>
-									<a href="#" id="heart"></a>
-								</header>
-							</section>
-							<section class="box">
-								<ul class="style2">
-									<li>
-										<article class="box post-excerpt">
-											<a href="#" class="image left"><img
-												src="../images/pic08.jpg" alt="" /></a>
-											<h3>
-												<a href="#">닉네임</a>
-											</h3>
-											<p>닉네임</p>
-										</article>
-									</li>
-								</ul>
-								<br> <a href="#" class="button style1">주문하기</a>
-							</section>
-							<section class="box">
-								<header>
-									<h2>그 외 링크</h2>
-								</header>
-								<ul class="style3">
-									<li><a href="#">Nulla iaculis egestas varius</a></li>
-									<li><a href="#">Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
-									<li><a href="#">Turpis vel leo accumsan aliquet</a></li>
-									<li><a href="#">Dapibus mi fermentum fusce non</a></li>
-									<li><a href="#">Arcu laoreet sapien tempus</a></li>
-									<li><a href="#">Nulla iaculis egestas varius</a></li>
-									<li><a href="#">Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
-								</ul>
-							</section>
-						</div>
-
-					</div>
+					</article>
 				</div>
+
 			</div>
-		</section>
+		</div>
 
 		<!-- Highlights -->
 		<section id="highlights" class="wrapper style3">
@@ -197,7 +127,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="../images/pic02.jpg" alt="" /></a>
+								src="images/pic02.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Aliquam diam consequat</a>
 							</h3>
@@ -212,7 +142,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="../images/pic03.jpg" alt="" /></a>
+								src="images/pic03.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Nisl adipiscing sed lorem</a>
 							</h3>
@@ -227,7 +157,7 @@
 					<div class="col-4 col-12-medium">
 						<section class="highlight">
 							<a href="#" class="image featured"><img
-								src="../images/pic04.jpg" alt="" /></a>
+								src="images/pic04.jpg" alt="" /></a>
 							<h3>
 								<a href="#">Mattis tempus lorem</a>
 							</h3>

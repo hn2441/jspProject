@@ -8,51 +8,45 @@
 -->
 <html>
 <head>
-<title>판매 페이지 입니다.</title>
+<title>판매 에디터 페이지 입니다.</title>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
 <style type="text/css">
-#heart {
-	position: relative;
-	width: 25px;
-	height: 22.5px;
-}
-#heart:before, #heart:after {
-	position: absolute;
-	content: "";
-	left: 12.5px;
-	top: 0px;
-	width: 12.5px;
-	height: 20px;
-	background: #f98780;
-	border-radius: 12.5px 12.5px 0 0;
-	transform: rotate(-45deg);
-	transform-origin: 0 100%
-}
-#heart:after {
-	left: 0;
-	transform: rotate(45deg);
-	transform-origin: 100% 100%;
-}
-#heart:hover {
-	background: #fcc8c4;
-}
-
+	#heart {
+		position: relative;
+		width: 25px;
+		height: 22.5px;
+	}
+	
+	#heart:before, #heart:after {
+		position: absolute;
+		content: "";
+		left: 12.5px;
+		top: 0px;
+		width: 12.5px;
+		height: 20px;
+		background: #f98780;
+		border-radius: 12.5px 12.5px 0 0;
+		transform: rotate(-45deg);
+		transform-origin: 0 100%
+	}
+	
+	#heart:after {
+		left: 0;
+		transform: rotate(45deg);
+		transform-origin: 100% 100%;
+	}
+	
+	#heart:hover {
+		background: #fcc8c4;
+	}
 </style>
+
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body class="right-sidebar is-preload">
-<%
-	session.setAttribute("id", "아이디"); //로그인 처리 하면 지우는 부분
-	session.setAttribute("adno", "12345"); //글 불러올때 adv 테이블에서 가져올 부분
-	session.setAttribute("sid", "판매자 아이디"); //글 불러올 때 adv 테이블에서 가져올 부분
-	
-	//전체 리뷰 갯수 가져와서 갯수 받아오는 부분
-/* 	ReviewDAO dao = new ReviewDAO();
-	int count = dao.selectAllCounter(); */
-	int count = 14;
-%>
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -93,7 +87,6 @@
 			</nav>
 
 		</section>
-
 		<!-- Main -->
 		<section id="main" class="wrapper style2">
 			<div class="title">Right Sidebar</div>
@@ -103,72 +96,91 @@
 
 						<!-- Content -->
 						<div id="content">
-							<a href="saleEditor_update.jsp" class="crud1">수정</a>
-							<a href="#" class="crud1">삭제</a>
 							<article class="box post">
 								<header class="style1">
-									<div>
-									</div>
-									<h2 name="title">판매글 페이지 제목</h2>
+								</header>
 									<div class="row gtr-150">
 										<div class="col-6 col-12-small">
-											<section class="box">
-												<div>
-													<p>가격</p>
-													<p>내용내용내용내용내용내용내용내용내용내용내용내용</p>
-												</div>
-											</section>
-										</div>
-										<div class="col-6 col-12-small">
-											<section class="box">
-												<div>
-													<p>가격</p>
-													<p>내용내용내용내용내용내용내용내용내용내용내용내용</p>
-												</div>
-
-											</section>
+											<form name="saleEditor" method="post" action="saleEditor_update_ok.jsp">
+<table style="width: 200%">
+												<tr>
+													<td style="width: 2%">제</td>
+													<td style="width: 2%;">　</td>
+													<td style="width: 2%;">　</td>
+													<td style="width: 2%;">목</td>
+													<td style="width: 2%;"></td>
+													<td colspan="3"><input type="text" name="title" value=""></td>
+												</tr>
+												<tr>
+													<td colspan="6" style="height : 20px"></td>
+												</tr>
+												<tr>
+													<td style="width: 2%;">가</td>
+													<td style="width: 2%;">　</td>
+													<td style="width: 2%;">　</td>
+													<td style="width: 2%;">격</td>
+													<td style="width: 2%;"></td>
+													<td><input type="text" name="price11"></td>
+													<td style="width: 0.5%;"></td>
+													<td><input type="text" name="price21"></td>
+												</tr>
+												<tr>
+													<td colspan="6" style="height : 5px"></td>
+												</tr>
+												<tr>
+													<td style="width: 2%;">내</td>
+													<td style="width: 2%;">　</td>
+													<td style="width: 2%;">　</td>
+													<td style="width: 2%;">용</td>
+													<td style="width: 2%;"></td>
+													<td><input type="text" name="price12" style="height: 100px;"></td>
+													<td style="width: 0.5%"></td>
+													<td><input type="text" name="price22" style="height: 100px;"></td>
+												</tr>
+												<tr>
+													<td colspan="6" style="height : 20px"></td>
+												</tr>
+												<tr>
+													<td style="width: 2%;">상</td>
+													<td style="width: 2%;">세</td>
+													<td style="width: 2%;">내</td>
+													<td style="width: 2%;">용</td>
+													<td style="width: 2%;"></td>
+													<td colspan="3"><input type="text" name="title" style="height: 200px;"></td>
+												</tr>
+												<tr>
+													<td colspan="6" style="height : 20px"></td>
+												</tr>
+												<tr>
+													<td style="width: 2%;">파</td>
+													<td style="width: 2%;">일</td>
+													<td style="width: 2%;">첨</td>
+													<td style="width: 2%;">부</td>
+													<td style="width: 2%;"></td>
+													<td colspan="3"><input type="text" name="img"></td>
+												</tr>
+												<tr>
+													<td colspan="6" style="height : 50px"></td>
+												</tr>
+												<tr>
+													<td colspan="8">
+														<div align="center">
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<button class="button style1">수정</button>
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<input type="reset" class="button style1">
+														</div>
+													</td>
+												</tr>
+											</table>
+											</form>
 										</div>
 									</div>
-								</header>
-								<img src="../images/pic01.jpg" alt="" style="width: 800px"/>
-								<p>본문 시작Fringilla nisl. Donec accumsan interdum nisi, quis
-									tincidunt felis sagittis eget. odio eleifend. Duis commodo
-									fringilla commodo. Aliquam erat volutpat. Vestibulum facilisis
-									leo magna. Cras sit amet urna eros, id egestas urna. Quisque
-									aliquam tempus euismod. Vestibulum ante ipsum primis in
-									faucibus.</p>
-								<p>Phasellus nisl nisl, varius id porttitor sed,
-									pellentesque ac orci. Pellentesque habitant morbi tristique
-									senectus et netus et malesuada fames ac turpis egestas. Morbi
-									bibendum justo sed mauris vehicula malesuada aliquam elit
-									imperdiet. Aliquam eu nibh lorem, eget gravida mi. Duis odio
-									diam, luctus et vulputate vitae, vehicula ac dolor.
-									Pellentesque at urna eget tellus lobortis ultrices sed non
-									erat. Donec eget erat non magna volutpat malesuada quis eget
-									eros. Nullam sodales cursus sapien, id consequat leo suscipit
-									ut. Praesent id turpis vitae turpis pretium ultricies.
-									Vestibulum sit amet risus elit.</p>
-
-								<div>
-									<ul class="style2">
-										<%
-										//리뷰 3개만 출력해줌
-										for(int i=0;i<3;i++){
-										%><li style="font-size: 17px">
-											<article>
-												<h3>
-													<a href="#"> 아이디 : <%=count-i %>번째 아이디 | 별점</a>
-												</h3>
-												<p>리뷰내용 Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
-											</article>
-										</li>
-										<%
-										}
-									%>
-										<li><a href="review.jsp" class="button style1">더 보기</a></li>
-									</ul>
-								</div>
 							</article>
 						</div>
 
@@ -203,17 +215,17 @@
 									<h2>그 외 링크</h2>
 								</header>
 								<ul class="style3">
-									<li><a href="#">링크1Nulla iaculis egestas varius</a></li>
-									<li><a href="#">링크2Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">링크3Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">링크4Sed hendrerit massa nam mattis</a></li>
-									<li><a href="#">링크5Turpis vel leo accumsan aliquet</a></li>
-									<li><a href="#">링크6Dapibus mi fermentum fusce non</a></li>
-									<li><a href="#">링크7Arcu laoreet sapien tempus</a></li>
-									<li><a href="#">링크8Nulla iaculis egestas varius</a></li>
-									<li><a href="#">링크9Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">링크10Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">링크11Sed hendrerit massa nam mattis</a></li>
+									<li><a href="#">Nulla iaculis egestas varius</a></li>
+									<li><a href="#">Augue massa feugiat quam pretium</a></li>
+									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
+									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
+									<li><a href="#">Turpis vel leo accumsan aliquet</a></li>
+									<li><a href="#">Dapibus mi fermentum fusce non</a></li>
+									<li><a href="#">Arcu laoreet sapien tempus</a></li>
+									<li><a href="#">Nulla iaculis egestas varius</a></li>
+									<li><a href="#">Augue massa feugiat quam pretium</a></li>
+									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
+									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
 								</ul>
 							</section>
 						</div>
