@@ -1,6 +1,6 @@
+<%@page import="java.util.Locale.Category"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="bean.AdvDTO"%>
-<%@page import="bean.AdvDAO"%>
+<%@page import="bean.*"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,16 +14,16 @@
 -->
 <html>
 	<head>
-		<title>Escape Velocity by HTML5 UP</title>
-		<meta charset="utf-8" />
+		<title>IT 개발자들을 위한 프리랜서 마켓</title>
+		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
+	
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
-			
 				<section id="header" class="wrapper">
 					
 					<!-- Logo -->
@@ -39,67 +39,54 @@
 						<nav id="nav">
 							<ul>
 								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="input.jsp">로그인</a></li>
-								<li><a href="left-sidebar.html">회원가입</a></li>
-								<li><a href="right-sidebar.html">고객 센터</a></li>
+								<li><a href="#">" "</a></li>
+								<li><a href="#">" "</a></li>
+								<li><a href="#">찾아 오시는 길</a></li>
+								<li><a href="#">고객 센터</a></li>
 							</ul>
 						</nav>
 						
-						<ul id="member">
-							<li><a href="#">로그인</a></li>
+				<%
+					/* 세션 등록 */
+					/* String id = "2@naver.com";
+					String category = null;
+					MemberDAO mDao = new MemberDAO();
+					MemberDTO mDto = mDao.selectId(id);
+					
+					session.setAttribute("id", mDto.getId());
+					
+					if(mDto.isCategory() == true) {
+						category = "판매자";
+					} else {
+						category = "비판매자";
+					}
+				
+					session.setAttribute("category", category); */
+					
+					if(session.getAttribute("id") == null) {
+				%>
+					<ul id="member">
+							<li><a href="#">로그인</a></li> <br>
 							<li><a href="#">회원가입</a></li>
-						</ul>	
+					</ul>	
+				<% 
+					} else {
+				%>
+					<ul id="member">
+						<li><a href="#"><%= session.getAttribute("id") %></a></li> <br>
+						<li><a href="#"><%= session.getAttribute("category") %></a></li>
+					</ul>
+				<% 	
+					} /* end 세션 등록 */
+				%>
+					
 				</section>
 	
 			<!-- Highlights -->
 				<section id="highlights" class="wrapper style3">
 					<div class="title">The Endorsements</div>
-					
-					<!-- 최근 본 상품 목록 -->
 					<% 
-						Cookie[] cookies = request.getCookies();
-						String title = null;
-						
-						if(cookies != null) {
-							for(int i =0; i < cookies.length; i++) {
-								if(cookies[i].getName().equals("title")) {
-									title = cookies[i].getValue();
-					%>
-					
-									<div id="recent">
-									<table id="recentTable">
-										<tr height="25">
-											<td >최근 본 상품</td>
-										</tr>
-										<tr height="25">
-											<td><a href="product.jsp?title=<%= title %>"><%= cookies[i].getValue() %></a></td>
-										</tr>
-					<% 
-								}
-								if(cookies[i].getName().equals("img")) {
-									
-					%>
-										<tr height="130">
-											<td>
-												<a href="product.jsp?title=<%= title %>">
-													<img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180">
-												</a>
-											</td>
-										</tr>
-					<% 
-								}
-								if(cookies[i].getName().equals("price")) {
-					%>
-										<tr height="25">
-											<td><a href="product.jsp?title=<%= title %>"><%= cookies[i].getValue() %></a></td>
-										</tr>
-									</table>
-									</div>
-					<% 					
-								}
-							}
-						}
-
+						/* 상품 랜덤 출력  */
 						Random ran = new Random();
 						AdvDAO dao = new AdvDAO();
 						ArrayList<AdvDTO> list = dao.number();
@@ -128,30 +115,66 @@
 						<div class="row aln-center">
 							<div class="col-4 col-12-medium">
 								<section class="highlight">
-									<h3 align="center"><a href="product.jsp?title=<%= ranlist1.getTitle() %>">상품: <%= ranlist1.getTitle() %></a></h3>
-									<a href="product.jsp?title=<%= ranlist1.getTitle() %>" class="image featured"><img src="<%= ranlist1.getImg() %>" width="350" height="300"/></a>
-									<h3 align="center"><a href="product.jsp?title=<%= ranlist1.getTitle() %>">가격: <%= ranlist1.getPrice() %></a></h3>
+									<h3 align="center"><a href="product.jsp?no=<%= ranlist1.getNo() %>">상품: <%= ranlist1.getTitle() %></a></h3>
+									<a href="product.jsp?no=<%= ranlist1.getNo() %>" class="image featured"><img src="<%= ranlist1.getImg() %>" width="350" height="300"/></a>
+									<h3 align="center"><a href="product.jsp?no=<%= ranlist1.getNo() %>">가격: <%= ranlist1.getPrice() %></a></h3>
 									<p></p>
 								</section>
 							</div>
 							<div class="col-4 col-12-medium">
 								<section class="highlight">
-									<h3 align="center"><a href="product.jsp?title=<%= ranlist2.getTitle() %>">상품: <%= ranlist2.getTitle() %></a></h3>
-									<a href="product.jsp?title=<%= ranlist2.getTitle() %>" class="image featured"><img src="<%= ranlist2.getImg() %>" width="350" height="300"/></a>
-									<h3 align="center"><a href="product.jsp?title=<%= ranlist2.getTitle() %>">가격: <%= ranlist2.getPrice() %></a></h3>
+									<h3 align="center"><a href="product.jsp?no=<%= ranlist2.getNo() %>">상품: <%= ranlist2.getTitle() %></a></h3>
+									<a href="product.jsp?no=<%= ranlist2.getNo() %>" class="image featured"><img src="<%= ranlist2.getImg() %>" width="350" height="300"/></a>
+									<h3 align="center"><a href="product.jsp?no=<%= ranlist2.getNo() %>">가격: <%= ranlist2.getPrice() %></a></h3>
 									<p></p>
 								</section>
 							</div>
 							<div class="col-4 col-12-medium">
 								<section class="highlight">
-									<h3 align="center"><a href="product.jsp?title=<%= ranlist3.getTitle() %>">상품: <%= ranlist3.getTitle() %></a></h3>
-									<a href="product.jsp?title=<%= ranlist3.getTitle() %>" class="image featured"><img src="<%= ranlist3.getImg() %>" width="350" height="300"/></a>
-									<h3 align="center"><a href="product.jsp?title=<%= ranlist3.getTitle() %>">가격: <%= ranlist3.getPrice() %></a></h3>
+									<h3 align="center"><a href="product.jsp?no=<%= ranlist3.getNo() %>">상품: <%= ranlist3.getTitle() %></a></h3>
+									<a href="product.jsp?no=<%= ranlist3.getNo() %>" class="image featured"><img src="<%= ranlist3.getImg() %>" width="350" height="300"/></a>
+									<h3 align="center"><a href="product.jsp?no=<%= ranlist3.getNo() %>">가격: <%= ranlist3.getPrice() %></a></h3>
 									<p></p>
 								</section>
 							</div>
 						</div>
-					</div>
+					</div> <!-- end 상품 랜덤 출력 -->
+					
+					<!-- 최근 본 상품 목록 -->
+						<div id="recent">
+							<table id="recentTable">
+								<tr height="25">
+									<td>최근 본 상품</td>
+								</tr>
+				<% 
+					Cookie[] cookies = request.getCookies();
+					
+					if(cookies != null) {
+					for(int i = 0; i < cookies.length; i++) {
+							if(! cookies[i].getName().equals("JSESSIONID")) {
+								/* 쿠키가 4개 이상 존재시 첫 번째 상품의 쿠키 삭제 */
+								if(cookies.length > 4) {
+									cookies[1].setMaxAge(0);
+									response.addCookie(cookies[1]);
+								}
+							
+					String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
+					AdvDTO dto = dao.selectTitle(title);
+				%>			
+								<tr height="25">
+									<td><h3><a href="product.jsp?no=<%= dto.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
+								</tr>
+								<tr height="130">
+									<td><a href="product.jsp?no=<%= dto.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
+								</tr>
+							</table>
+				<%
+							}					
+	
+						}		
+					}
+				%>
+							</div> <!-- end 최근 본 상품 목록 -->
 				</section>
 		</div>
 	</body>
