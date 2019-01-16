@@ -137,7 +137,7 @@ public class AdvDAO {
 		
 		con = pool.getConnection();
 		
-		String sql = "select title, price, img from ADV where title like '%" + search + "%'";
+		String sql = "select no, title, price, img from ADV where title like '%" + search + "%'";
 		ps = con.prepareStatement(sql);
 		rs = ps.executeQuery();
 		
@@ -147,6 +147,7 @@ public class AdvDAO {
 		while(rs.next()) {
 			dto = new AdvDTO();
 			
+			dto.setNo(rs.getInt("no"));
 			dto.setTitle(rs.getString("title"));
 			dto.setPrice(rs.getString("price"));
 			dto.setImg(rs.getString("img"));
@@ -154,26 +155,28 @@ public class AdvDAO {
 			list.add(dto);
 		}
 		
+		pool.freeConnection(con, ps, rs);
+		
 		return list;
-	}//end searck()
+	}//end search()
 	
 	
 	//yis 상품 검색(세부 상품 결과 가져오기)
-	public AdvDTO select(String title) throws Exception {
+	public AdvDTO select(int no) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		AdvDTO dto = new AdvDTO();
 		
 		con = pool.getConnection();
 		
-		String sql = "select * from ADV where title=?";
+		String sql = "select * from ADV where no=?";
 		ps = con.prepareStatement(sql);
-		ps.setString(1, title);
+		ps.setInt(1, no);
 		rs = ps.executeQuery();
 		
 		while(rs.next()) {
 			
-			dto.setNo(Integer.parseInt(rs.getString("no")));
+			dto.setNo(rs.getInt("no"));
 			dto.setSid(rs.getString("sid"));
 			dto.setTitle(rs.getString("title"));
 			dto.setPrice(rs.getString("price"));
@@ -181,6 +184,32 @@ public class AdvDAO {
 			dto.setImg(rs.getString("img"));
 		
 		}
+		
+		pool.freeConnection(con, ps, rs);
+		
+		return dto;
+	}//end select()
+	
+	//yis --> title을 받아서 no 값을 넘겨줌
+	public AdvDTO selectTitle(String title) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		AdvDTO dto = new AdvDTO();
+		
+		con = pool.getConnection();
+		
+		String sql = "select no from ADV where title=?";
+		ps = con.prepareStatement(sql);
+		ps.setString(1, title);
+		rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			
+			dto.setNo(rs.getInt("no"));
+		
+		}
+		
+		pool.freeConnection(con, ps, rs);
 		
 		return dto;
 	}//end select()
@@ -206,6 +235,8 @@ public class AdvDAO {
 			list.add(dto);
 		}
 		
+		pool.freeConnection(con, ps, rs);
+		
 		return list;
 	}//end number
 	
@@ -217,17 +248,20 @@ public class AdvDAO {
 	
 		con = pool.getConnection();
 		
-		String sql = "select title, price, img from ADV where no=?";
+		String sql = "select no, title, price, img from ADV where no=?";
 		ps = con.prepareStatement(sql);
 		ps.setInt(1, no);
 		rs = ps.executeQuery();
 		
 		while(rs.next()) {
+			
+			dto.setNo(rs.getInt("no"));
 			dto.setTitle(rs.getString("title"));
 			dto.setPrice(rs.getString("price"));
 			dto.setImg(rs.getString("img"));
-
 		}
+		
+		pool.freeConnection(con, ps, rs);
 		
 		return dto;
 	}//end randomPro
