@@ -12,7 +12,7 @@
 		<title>Insert title here</title>
 		<link rel="stylesheet" href="assets/css/main.css" />
 		
-		<!-- 자동 새로 고침 -->
+		<!-- 최근 본 상품 목록 자동 새로 고침  -->
 		<script type="text/javascript">
 			function refresh() {
 				if (self.name != 'reload') {
@@ -20,8 +20,7 @@
 				   	self.location.reload(true);
 				}
 				else self.name = ''; 
-			}
-		
+			} /* end 자동 새로 고침 */
 		</script>
 	</head>
 	
@@ -45,8 +44,8 @@
 						<nav id="nav">
 							<ul>
 								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="#">" "</a></li>
-								<li><a href="#">" "</a></li>
+								<li><a href="#">마이페이지</a></li>
+								<li><a href="#">찜 목록</a></li>
 								<li><a href="#">찾아 오시는 길</a></li>
 								<li><a href="#">고객 센터</a></li>
 							</ul>
@@ -64,6 +63,7 @@
 						} else {
 					%>
 						<ul id="member">
+							<li><h3><button name="logout" onclick="">로그아웃</button></h3></li>
 							<li><a href="#"><%= session.getAttribute("id") %></a></li> <br>
 							<li><a href="#"><%= session.getAttribute("category") %></a></li>
 						</ul>
@@ -84,45 +84,47 @@
 			String product = dto.getTitle();
 			String content = dto.getImg();
 			
+			/* 쿠키에 상품에 대한 정보를 등록 할 때 URLENcoder를 이용하여 생성 */
 	 		Cookie cProduct = new Cookie(URLEncoder.encode(product, "UTF-8"), URLEncoder.encode(content, "UTF-8"));
 			response.addCookie(cProduct);
 		%>
 		
-		<!-- 상품 정보가 제대로 출력되는지 확인해 보기 위해 추가한 문장 -->
+		<!-- 상품 정보가 제대로 출력되는지 확인해 보기 위해 추가한 문장  ------- 상품 정보가 들어갈 예정 -->
 		<%= dto %>
+		<!-- -------------------------------------------------------------------------------- -->
 		
-				<div id="recent">
-					<table id="recentTable">
-						<tr height="25">
-							<td>최근 본 상품</td>
-						</tr>
+		<!-- 최근본 상품 목록 -->
+		<div id="recent">
+			<table id="recentTable">
+					<tr height="25">
+						<td>최근 본 상품</td>
+					</tr>
 		<% 
 			Cookie[] cookies = request.getCookies();
 			for(int i = 0; i < cookies.length; i++) {
 				if(! cookies[i].getName().equals("JSESSIONID")) {
-					/* 쿠키가 4개 이상 존재시 첫 번째 상품의 쿠키 삭제 */
+					/* 쿠키가 4개 이상 존재시 첫 번째 쿠키 삭제 */
 					if(cookies.length > 4) {
 						cookies[1].setMaxAge(0);
 						response.addCookie(cookies[1]);
 					}
 					
-			/* 상품이름으로 DB를 검색하여  no 값을 가져옴 */
-			String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
-			AdvDTO dto1 = dao.selectTitle(title);
+					/* 상품이름으로 DB를 검색하여  no 값을 가져옴 */
+					String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
+					AdvDTO dto1 = dao.selectTitle(title);
 		%>
-						<tr height="25">
-							<td><h3><a href="product.jsp?no=<%= dto1.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
-						</tr>
-						<tr height="130">
-							<td><a href="product.jsp?no=<%= dto1.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
-						</tr>
-					</table>
+					<tr height="25">
+						<td><h3><a href="product.jsp?no=<%= dto1.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
+					</tr>
+					<tr height="130">
+						<td><a href="product.jsp?no=<%= dto1.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
+					</tr>
+				</table>
 		<%
 				}					
-
 			}		
 		%>
-					</div> <!-- end 상품 쿠키 등록  -->
+		</div> <!-- end 상품 쿠키 등록 및 최근본 상품 목록 -->
 		</section>		
 	</div>
 

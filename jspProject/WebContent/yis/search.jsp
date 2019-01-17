@@ -1,3 +1,8 @@
+<%@page import="java.util.Locale"%>
+<%@page import="org.apache.tomcat.jni.Local"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.awt.List"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.net.URLEncoder"%>
@@ -29,12 +34,11 @@
 					</div>
 
 					<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
-						
 						<nav id="nav">
 							<ul>
 								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="#">" "</a></li>
-								<li><a href="#">" "</a></li>
+								<li><a href="#">마이페이지</a></li>
+								<li><a href="#">찜 목록</a></li>
 								<li><a href="#">찾아 오시는 길</a></li>
 								<li><a href="#">고객 센터</a></li>
 							</ul>
@@ -52,11 +56,12 @@
 						} else {
 					%>
 						<ul id="member">
+							<li><h3><button name="logout" onclick="">로그아웃</button></h3></li>
 							<li><a href="#"><%= session.getAttribute("id") %></a></li> <br>
 							<li><a href="#"><%= session.getAttribute("category") %></a></li>
 						</ul>
 					<% 	
-						}
+						} /* end 세션 값 불러오기 */
 					%>
 				</section>
 				
@@ -64,9 +69,10 @@
 			/* 연관 검색어 */
 			String search = request.getParameter("search");
 			int count = 0; // 검색어를 수치를 증가 시킬 변수
-			String[] search1 = null;
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+			Date day = new Date();
+			String today = formatter.format(day);
 			searchDTO sDto = null;
-		
 			
 			/* 입력한 검색어가 DB에 있는지 확인 */
 			searchDAO sDao = new searchDAO();
@@ -74,20 +80,37 @@
 			
 			/* 검색어가 DB에 있을 경우 --> 검색어 수치 1 증가 */
 			if(search.equals(sDto.getSearch())) {
-				search = sDto.getSearch();
-				count = sDto.getCount() + 1;
-				
-				sDto.setSearch(search);
-				sDto.setCount(count);
-				
-				/* 검색어 수치 증가 */
-				sDao.update(sDto);
+				/* DB에서 가져온 day가 오늘 날짜와 같은 경우 */
+				if(today.equals(sDto.getDay())) {
+					search = sDto.getSearch();
+					count = sDto.getCount() + 1;
+					
+					sDto.setSearch(search);
+					sDto.setCount(count);
+					sDto.setDay(today);
+					
+					/* 검색어 수치 증가 */
+					sDao.update(sDto);
+					
+				/* DB에서 가져온 day가 오늘 날짜와 다른 경우 */	
+				} else {
+					search = sDto.getSearch();
+					count = 1;
+					
+					sDto.setSearch(search);
+					sDto.setCount(count);
+					sDto.setDay(today);
+					
+					/* 검색어 수치 1로 리셋 */
+					sDao.update(sDto);
+				}
 				
 			/* 검색어가 DB에 없을 경우 --> DB에 해당 검색어 등록 후 수치를 1로 지정 */
 			} else if (sDto.getSearch() == null){
 				count = 1;
 				sDto.setSearch(search);
 				sDto.setCount(count);
+				sDto.setDay(today);
 				
 				/* 검색어 등록 */
 				sDao.insert(sDto);
@@ -104,17 +127,26 @@
 			/* DB에서 입력한 검색어를 포함한 모든 데이터를 불러옴 */
 			ArrayList<searchDTO> sList = sDao.searchInc(search);
 			
-			for(int i = 0; i < sList.size(); i++) {
-				sDto = new searchDTO();
-				sDto = sList.get(i);
+			/* 입력한 검색어가 없을 경우 */
+			if(search.equals("")) {
 		%>
-				&nbsp; 
-				<a href="search.jsp?search=<%= sDto.getSearch() %>"><%= sDto.getSearch() %></a>
-				&nbsp; &nbsp; &nbsp; &nbsp; 
+				없음
 		<% 
-			} 
+			/* 입력한 검색어가 있을 경우 */
+			} else {
+				for(int i = 0; i < sList.size(); i++) {
+					sDto = new searchDTO();
+					sDto = sList.get(i);
+			%>
+					&nbsp; 
+					<a href="search.jsp?search=<%= sDto.getSearch() %>"><%= sDto.getSearch() %></a>
+					&nbsp; &nbsp; &nbsp; &nbsp; 
+			<% 
+				} 
+			}
 		%>
-			</h3> <!-- end 연관 검색어 -->
+				</h3> <!-- end 연관 검색어 -->
+				
 		<%
 			/* 검색한 상품 목록 출력 */
 			AdvDAO dao = new AdvDAO();
@@ -144,39 +176,40 @@
 				
 			<!-- 최근 본 상품 목록 -->
 						
-						<div id="recent">
-							<table id="recentTable">
-								<tr height="25">
-									<td>최근 본 상품</td>
-								</tr>
-				<% 
-					Cookie[] cookies = request.getCookies();
+			<div id="recent">
+				<table id="recentTable">
+					<tr height="25">
+						<td>최근 본 상품</td>
+					</tr>
+			<% 
+				Cookie[] cookies = request.getCookies();
 					
-					if(cookies != null) {
+				if(cookies != null) {
 					for(int i = 0; i < cookies.length; i++) {
-							if(! cookies[i].getName().equals("JSESSIONID")) {
-								/* 쿠키가 4개 이상 존재시 첫 번째 상품의 쿠키 삭제 */
-								if(cookies.length > 4) {
-								cookies[1].setMaxAge(0);
-								response.addCookie(cookies[1]);
-								}
+						if(! cookies[i].getName().equals("JSESSIONID")) {
+							/* 쿠키가 4개 이상 존재시 첫 번째 쿠키 삭제 */
+							if(cookies.length > 4) {
+							cookies[1].setMaxAge(0);
+							response.addCookie(cookies[1]);
+							}
 							
-					String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
-					dto = dao.selectTitle(title);
-				%>			
-								<tr height="25">
-									<td><h3><a href="product.jsp?no=<%= dto.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
-								</tr>
-								<tr height="130">
-									<td><a href="product.jsp?no=<%= dto.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
-								</tr>
-							</table>
-				<%
+							String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
+							dto = dao.selectTitle(title);
+			%>			
+					<tr height="25">
+						<td><h3><a href="product.jsp?no=<%= dto.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
+					</tr>
+					<tr height="130">
+						<td><a href="product.jsp?no=<%= dto.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
+					</tr>
+				</table>
+			<%
 							}					
 						}
 					}
-				%>
-							</div> <!-- end 최근 본 상품 목록 -->
+			%>
+			</div> <!-- end 최근 본 상품 목록 -->
+			
 		</section>
 	</div>
 	</body>

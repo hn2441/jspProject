@@ -1,3 +1,7 @@
+<%@page import="javax.swing.text.Style"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Locale.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.*"%>
@@ -17,6 +21,9 @@
 		<title>IT 개발자들을 위한 프리랜서 마켓</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		<!-- 메인 페이지 자동 새로고침 10초 마다 한 번씩 -->
+		<meta http-equiv="refresh" content="10">
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	
@@ -39,8 +46,8 @@
 						<nav id="nav">
 							<ul>
 								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="#">" "</a></li>
-								<li><a href="#">" "</a></li>
+								<li><a href="#">마이페이지</a></li>
+								<li><a href="#">찜 목록</a></li>
 								<li><a href="#">찾아 오시는 길</a></li>
 								<li><a href="#">고객 센터</a></li>
 							</ul>
@@ -63,9 +70,11 @@
 				
 					session.setAttribute("category", category); */
 					
+				/* 로그인한 세션 값 확인 */
 					if(session.getAttribute("id") == null) {
 				%>
 					<ul id="member">
+							<li><h3><button name="logout" onclick="">로그아웃</button></h3></li>
 							<li><a href="#">로그인</a></li> <br>
 							<li><a href="#">회원가입</a></li>
 					</ul>	
@@ -73,20 +82,50 @@
 					} else {
 				%>
 					<ul id="member">
+						<li><h3><button name="logout" onclick="">로그아웃</button></h3></li>
 						<li><a href="#"><%= session.getAttribute("id") %></a></li> <br>
 						<li><a href="#"><%= session.getAttribute("category") %></a></li>
 					</ul>
+					<input type="submit" value="로그아웃">
 				<% 	
-					} /* end 세션 등록 */
-				%>
+					} /* end 로그인한 세션 값 확인 */
 					
+				%>
 				</section>
 	
 			<!-- Highlights -->
 				<section id="highlights" class="wrapper style3">
+					
+					<div style="align-content: center; margin: auto; width: 500px;">
+
+					<% 
+						/* TOP 검색어(오늘 날짜 기준) */
+						searchDAO sDao = new searchDAO();
+						searchDTO sDto = new searchDTO();
+						SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+						Date day = new Date();
+						String today = formatter.format(day);
+					%>
+						<h3 align="center"><%= today %></h3> <br>
+						<h3 align="center">검색어 TOP 5</h3>
+					<%
+						ArrayList<searchDTO> sList = sDao.topFive(today);
+					
+						for(int i = 0; i < sList.size(); i++) {
+							sDto = new searchDTO();
+							sDto = sList.get(i);
+							
+					%>
+								<!-- 검색 순위 출력 -->
+								<h3 align="center" ><%= i+1 + " 위"%> &nbsp; <a href="search.jsp?search=<%= sDto.getSearch() %>"><%= sDto.getSearch() %></a></h3>
+					<% 							
+						} 
+					%>
+					</div> <!-- end TOP 검색어 -->
+					
 					<div class="title">The Endorsements</div>
 					<% 
-						/* 상품 랜덤 출력  */
+					/* 상품 랜덤 출력  */
 						Random ran = new Random();
 						AdvDAO dao = new AdvDAO();
 						ArrayList<AdvDTO> list = dao.number();
@@ -109,7 +148,10 @@
 						AdvDTO ranlist2 = dao.randomPro(ranNum2);
 						AdvDTO ranlist3 = dao.randomPro(ranNum3);
 					%>
+					
+					<br><br><br>
 
+						<!-- 상품 랜던 출력 결과 뿌리기 -->
 					<div class="title">상 &nbsp; &nbsp; &nbsp; &nbsp; 품</div>
 					<div class="container">
 						<div class="row aln-center">
@@ -140,42 +182,44 @@
 						</div>
 					</div> <!-- end 상품 랜덤 출력 -->
 					
-					<!-- 최근 본 상품 목록 -->
-						<div id="recent">
-							<table id="recentTable">
-								<tr height="25">
-									<td>최근 본 상품</td>
-								</tr>
+				<!-- 최근 본 상품 목록 -->
+				<div id="recent">
+					<table id="recentTable">
+						<tr height="25">
+							<td>최근 본 상품</td>
+						</tr>
 				<% 
+					/* 등록 된 쿠키 값 가져오기 */
 					Cookie[] cookies = request.getCookies();
 					
 					if(cookies != null) {
-					for(int i = 0; i < cookies.length; i++) {
+						for(int i = 0; i < cookies.length; i++) {
 							if(! cookies[i].getName().equals("JSESSIONID")) {
-								/* 쿠키가 4개 이상 존재시 첫 번째 상품의 쿠키 삭제 */
+								/* 쿠키가 4개 이상 존재시 첫 번째 쿠키 삭제 */
 								if(cookies.length > 4) {
 									cookies[1].setMaxAge(0);
 									response.addCookie(cookies[1]);
 								}
-							
-					String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
-					AdvDTO dto = dao.selectTitle(title);
+										
+								/* 등록 된 쿠키에 해당하는 상품 정보 DB에서 가져오기 */
+								String title = URLDecoder.decode(cookies[i].getName(), "UTF-8");
+								AdvDTO dto = dao.selectTitle(title);
 				%>			
-								<tr height="25">
-									<td><h3><a href="product.jsp?no=<%= dto.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
-								</tr>
-								<tr height="130">
-									<td><a href="product.jsp?no=<%= dto.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
-								</tr>
-							</table>
+						<tr height="25">
+							<td><h3><a href="product.jsp?no=<%= dto.getNo() %>"><%= URLDecoder.decode(cookies[i].getName(), "UTF-8") %></a></h3></td>
+						</tr>
+						<tr height="130">
+							<td><a href="product.jsp?no=<%= dto.getNo() %>"><img src="<%= URLDecoder.decode(cookies[i].getValue(), "UTF-8") %>" height="120" width="180"></a></td>
+						</tr>
+					</table>
 				<%
 							}					
-	
 						}		
 					}
 				%>
-							</div> <!-- end 최근 본 상품 목록 -->
-				</section>
+				</div> <!-- end 최근 본 상품 목록 -->
+				
+			</section>
 		</div>
 	</body>
 </html>
