@@ -13,11 +13,12 @@
 </head>
 <body>
 <%
+	//--------------------------------------------------게시글 수정시 DB에 올리는 페이지----------------------------------------------------
 	BBSDAO dao = new BBSDAO();
 	BBSDTO dto = new BBSDTO();
 	
 	
-	int num = Integer.parseInt("num");
+	int num = Integer.parseInt(request.getParameter("num"));
 	String title = request.getParameter("title");
 	String write = request.getParameter("write");
 	

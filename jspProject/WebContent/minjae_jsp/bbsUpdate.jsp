@@ -15,18 +15,18 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<script type="text/javascript">
 		
+		//게시판 업데이트시 값 전달하는 함수
 		function update() {
-			var num = document.getElementById("num").value;
+			var num = document.getElementById("num").getAttribute("value");
 			var	title = document.getElementById("title").value;
 			var	write = document.getElementById("write").value;
-			var id = "1";
-			var id2 = "1";
 			//var date = document.getElementById("date").value;
 			//var view = document.getElemeentById("view").value;
-			//document.write(title + "<br>");
-			//document.write(write);
 			
-			location.href="bbsSave2.jsp?&title=" + title + "&write=" + write +"&num" + num;
+			document.write(title + "<br>");
+			document.write(write + "<br>");
+			document.write(num);
+			location.href="bbsSave2.jsp?&title=" + title + "&write=" + write +"&num=" + num;
 			alert('수정완료');
 		}
 		
@@ -44,36 +44,34 @@
 							<p>일단 보겠습니다.</p>
 						</div>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li>
-									<a href="#">Dropdown</a>
-									<ul>
-										<li><a href="#">Lorem ipsum</a></li>
-										<li><a href="#">Magna veroeros</a></li>
-										<li><a href="#">Etiam nisl</a></li>
-										<li>
-											<a href="#">Sed consequat</a>
-											<ul>
-												<li><a href="#">Lorem dolor</a></li>
-												<li><a href="#">Amet consequat</a></li>
-												<li><a href="#">Magna phasellus</a></li>
-												<li><a href="#">Etiam nisl</a></li>
-												<li><a href="#">Sed feugiat</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Nisl tempus</a></li>
-									</ul>
-								</li>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
-								<li><a href="right-sidebar.html">Right Sidebar</a></li>
-								<li class="current"><a href="no-sidebar.html">Login</a></li>
-							</ul>
-						</nav>
-
-				</section>
+					<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
+                  
+                  <nav id="nav">
+                     <ul>
+                        <li class="current"><a href="main.jsp">홈</a></li>
+                        <li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+                        <li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+                        <li><a href="googleMap.jsp">찾아 오시는 길</a></li>
+                        <li><a href="FAQ.html">고객 센터</a></li>
+                        <li>|</li>
+                    <%
+                  /* 로그인한 세션 값 확인 */
+                     if(session.getAttribute("id") == null) {
+                  %>
+                        <li><a href="loginPage.jsp">로그인</a></li>
+                  <% 
+                     } else {
+                  %>
+                        <li><a href="#"><%= session.getAttribute("id") %></a></li>
+                        <li><a href="logout.jsp">로그아웃</a></li>
+                  <%    
+                     } /* end 로그인한 세션 값 확인 */
+                  %>
+                     </ul>
+                  </nav>
+            <div>
+            </div>
+            </section>
 
 			<!-- Main -->
 				<div id="main" class="wrapper style2">
@@ -86,7 +84,7 @@
 							SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 							String date = sf.format(now);
 							
-							String num = request.getParameter("num");
+							int num = request.getContentLength();
 							String title = request.getParameter("title");
 							String id = request.getParameter("id");
 							String day = request.getParameter("date");
@@ -94,7 +92,7 @@
 							String write = request.getParameter("write");
 							
 							BBSDAO dao = new BBSDAO();
-							BBSDTO dto = dao.select(title);
+							BBSDTO dto = dao.select(title);			
 						%>
 							<tr>
 								<td style ="width: 20%;">글 번호</td>

@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+<%	//------------------------------------------------게시글 등록시 DB에 저장하는 페이지---------------------------------------------------
 	Date now = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 	BBSDAO dao = new BBSDAO();

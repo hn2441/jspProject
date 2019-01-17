@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.BBSDTO"%>
@@ -14,6 +15,36 @@
 	</head>
 	
 	<body class="no-sidebar is-preload" style="color:black">
+		<script type="text/javascript">
+		<%	
+		BBSDAO dao = new BBSDAO();
+		String id = request.getParameter("id");
+		String id2 = request.getParameter("id2");
+		session.setAttribute("id", id);
+		session.setAttribute("id2", id2);
+		%>
+		
+		//글 작성시 로그인 여부 체크 함수
+			function check(){
+				var id = '<%=(String)session.getAttribute("id") %>';
+				var id2 = '<%=(String)session.getAttribute("id2") %>';
+				
+				if('<%=(String)session.getAttribute("id2") %>' != null){
+					id2 = '<%=(String)session.getAttribute("id2") %>';
+					var price = prompt("가격을 입력하세요");
+					alert("글 작성을 시작합니다.");
+					location.href = "payment.jsp?id2=" + id2 +"&price=" + price;
+				}else if('<%=(String)session.getAttribute("id") %>' != null){
+					id2 = '<%=(String)session.getAttribute("id") %>';
+					alert("글 작성을 시작합니다.");
+					location.href = "BBSinput.jsp?id=" + id;
+				}else{
+				alert("로그인해주세요");
+				//location.href = "#"; -----로그인 페이지
+				}
+			}
+			
+		</script>
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -25,45 +56,38 @@
 							<p>궁금하신 점은 게시판에 글을 남겨주세요.</p>
 						</div>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li>
-									<a href="#">Dropdown</a>
-									<ul>
-										<li><a href="#">Lorem ipsum</a></li>
-										<li><a href="#">Magna veroeros</a></li>
-										<li><a href="#">Etiam nisl</a></li>
-										<li>
-											<a href="#">Sed consequat</a>
-											<ul>
-												<li><a href="#">Lorem dolor</a></li>
-												<li><a href="#">Amet consequat</a></li>
-												<li><a href="#">Magna phasellus</a></li>
-												<li><a href="#">Etiam nisl</a></li>
-												<li><a href="#">Sed feugiat</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Nisl tempus</a></li>
-									</ul>
-								</li>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
-								<li><a href="right-sidebar.html">Right Sidebar</a></li>
-								<li class="current"><a href="no-sidebar.html">Login</a></li>
-							</ul>
-						</nav>
-
-				</section>
+					<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
+                  
+                  <nav id="nav">
+                     <ul>
+                        <li class="current"><a href="main.jsp">홈</a></li>
+                        <li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+                        <li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+                        <li><a href="googleMap.jsp">찾아 오시는 길</a></li>
+                        <li><a href="FAQ.html">고객 센터</a></li>
+                        <li>|</li>
+                    <%
+                  /* 로그인한 세션 값 확인 */
+                     if(session.getAttribute("id") == null) {
+                  %>
+                        <li><a href="loginPage.jsp">로그인</a></li>
+                  <% 
+                     } else {
+                  %>
+                        <li><a href="#"><%= session.getAttribute("id") %></a></li>
+                        <li><a href="logout.jsp">로그아웃</a></li>
+                  <%    
+                     } /* end 로그인한 세션 값 확인 */
+                  %>
+                     </ul>
+                  </nav>
+            <div>
+            </div>
+            </section>
 
 			<!-- Main -->
 				<div id="main" class="wrapper style2">
-					<%
-						String id = null;
-						if(session.getAttribute("id") != null){
-							id = (String)session.getAttribute("id");
-						}
-					%>
+					
 					<div class="title">게시판</div> 
 					<div class="container">
 					<div style="text-align:center;">
@@ -84,8 +108,8 @@
 							</tr>
 							
 						<%	
+							//게시판 메인에 게시글 목록띄우는 것
 							response.setHeader("Refresh", "10");
-							BBSDAO dao = new BBSDAO();
 							ArrayList<BBSDTO> list = dao.selectAll();
 							BBSDTO dto = null;
 							
@@ -104,8 +128,8 @@
 							}
 						%>
 					</table>
-					<button type = "button" onclick="location.href='BBSinput.jsp' ">글쓰기</button>
-					<button type = "button">삭제</button>
+					<button type = "button" onclick="check();">주문하기</button>
+					<button type = "button" onclick="location.href='main'">되돌아가기</button>
 					</div>
 					</div>
 				</div>

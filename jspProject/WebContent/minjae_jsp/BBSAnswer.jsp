@@ -1,3 +1,5 @@
+<%@page import="bean.BBSDTO"%>
+<%@page import="bean.BBSDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
@@ -10,20 +12,29 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		
 		<script type="text/javascript">
+		<%
+		BBSDAO dao = new BBSDAO();
+		BBSDTO dto = new BBSDTO();
 		
-		//게시글 등록시 값 전달 함수
+		String title = request.getParameter("title");
+		String write = request.getParameter("write");
+		int num = Integer.parseInt(request.getParameter("num"));
+		request.setAttribute("num", num);
+		%>
+		
+		//답글 등록시 값들 전달
 		function input() {
-			var	title = document.getElementById("title").value;
+			var	title = document.getElementById("title").getAttribute("value")
 			var	write = document.getElementById("write").value;
 			write = write.replace(/(?:\r\n|\r|\n)/g, "<br>"); //개행처리
 			document.getElementById("write").value = write;
-			var date = null;
-			var view = null;
-			var id = '<%=session.getAttribute("id")%>';  //넘어온 아이디값 받기
-			/* document.write(title);
-			document.write(write); */
+			var id2 = '<%=session.getAttribute("id2")%>';
+			var num = ${num}
+			document.write(num);
+			document.write(title);
+			document.write(write);
 			
-			location.href="bbsSave.jsp?&title=" + title + "&write=" + write + "&id=" + id +"&date=" + date + "&view=" + view;
+			location.href="bbsSave3.jsp?title=" + title + "&write=" + write + "&id2=" + id2 + "&num=" + num;
 			
 			alert('등록완료');
 		}
@@ -80,9 +91,8 @@
 					<div style="text-align:center;">
 						<table class = "bbs">
 			<center>
-			<input type= "text" name="title" value="제목" size = "90" id="title"><br>
+			<input type= "text" name="title" value=<%=title %> size = "90" id="title" disabled><br>
 			<textarea rows="15" cols="80" name="write" id="write">
-			글 작성
 			</textarea><br>
 					<button type = "button" onclick="input();">등록</button>
 					<button type = "button" onclick="location.href='BBS.jsp' ">취소</button>
@@ -94,4 +104,4 @@
 </div>
 </form>
 	</body>
-</html>
+</html> 

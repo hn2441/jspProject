@@ -1,3 +1,6 @@
+<%@page import="java.net.URLDecoder"%>
+<%@page import="bean.BBSDTO2"%>
+<%@page import="bean.BBSDAO2"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
@@ -15,17 +18,19 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<script type="text/javascript">
 		
+	//원글 수정시 값 전달하는 함수	
  	function update() {
 			var	title = document.getElementById("title").getAttribute("value");
-			var	write = document.getElementById("write").getAttribute("value");
-			var id = "1";
-			var id2 = "1";
-			var date = document.getElementById("date").getAttribute("value");
-			var view = document.getElementById("view").getAttribute("value");
-			var num = document.getElementById("num").getAttribute("value");
-			
-			location.href="bbsUpdate.jsp?&title=" + title + "&write=" + write + "&id=" + id + "&id2=" + id2 +"&date=" + date + "&view=" + view+ "&num=" + num;
+			var num = document.getElementById("num").getAttribute("value");			
+			location.href="bbsUpdate.jsp?title=" + title + "&num=" + num;
 			}
+	
+ 	//답글 작성시 값 전달하는 함수
+ 	function answer() {
+		var	title = document.getElementById("title").getAttribute("value");
+		var num = document.getElementById("num").getAttribute("value");			
+		location.href="BBSAnswer.jsp?title=" + title + "&num=" + num;
+		}
 			</script>
 			
 			
@@ -42,36 +47,34 @@
 							<p>일단 보겠습니다.</p>
 						</div>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li>
-									<a href="#">Dropdown</a>
-									<ul>
-										<li><a href="#">Lorem ipsum</a></li>
-										<li><a href="#">Magna veroeros</a></li>
-										<li><a href="#">Etiam nisl</a></li>
-										<li>
-											<a href="#">Sed consequat</a>
-											<ul>
-												<li><a href="#">Lorem dolor</a></li>
-												<li><a href="#">Amet consequat</a></li>
-												<li><a href="#">Magna phasellus</a></li>
-												<li><a href="#">Etiam nisl</a></li>
-												<li><a href="#">Sed feugiat</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Nisl tempus</a></li>
-									</ul>
-								</li>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
-								<li><a href="right-sidebar.html">Right Sidebar</a></li>
-								<li class="current"><a href="no-sidebar.html">Login</a></li>
-							</ul>
-						</nav>
-
-				</section>
+					<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
+                  
+                  <nav id="nav">
+                     <ul>
+                        <li class="current"><a href="main.jsp">홈</a></li>
+                        <li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+                        <li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+                        <li><a href="googleMap.jsp">찾아 오시는 길</a></li>
+                        <li><a href="FAQ.html">고객 센터</a></li>
+                        <li>|</li>
+                    <%
+                  /* 로그인한 세션 값 확인 */
+                     if(session.getAttribute("id") == null) {
+                  %>
+                        <li><a href="loginPage.jsp">로그인</a></li>
+                  <% 
+                     } else {
+                  %>
+                        <li><a href="#"><%= session.getAttribute("id") %></a></li>
+                        <li><a href="logout.jsp">로그아웃</a></li>
+                  <%    
+                     } /* end 로그인한 세션 값 확인 */
+                  %>
+                     </ul>
+                  </nav>
+            <div>
+            </div>
+            </section>
 
 			<!-- Main -->
 				<div id="main" class="wrapper style2">
@@ -79,7 +82,7 @@
 					<div class="container">
 					<div style="text-align:center;">
 						<table class = "bbs">
-						<%	
+						<%	//---------------------------------게시판 원글 부분 값 -----------------------------------------------
 							Date now = new Date();
 							SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 							String date = sf.format(now);
@@ -94,10 +97,10 @@
 							BBSDAO dao = new BBSDAO();
 							
 							BBSDTO dto = dao.select(title); //정보
-							BBSDTO dto2 = dao.select2(title); //날짜가져오기
+							BBSDTO dto1 = dao.select2(title); //날짜가져오기
 							dao.update(title);
-		
-							
+						
+							int num = dto.getNum();
 							
 							
 						%>
@@ -115,7 +118,7 @@
 							</tr>
 							<tr>
 								<td style ="width: 20%;">작성한 날짜</td>
-								<td colspan="2" id="date" value ="<%= dto2.getDate() %>"><%= dto2.getDate() %></td>
+								<td colspan="2" id="date" value ="<%= dto1.getDate() %>"><%= dto1.getDate() %></td>
 							</tr>
 							<tr>
 								<td style ="width: 20%;">조회수</td>
@@ -126,8 +129,43 @@
 								<td colspan="2" id="write" value="<%= dto.getWrite() %>"><%= dto.getWrite() %></td>
 							</tr>
 					</table>
+					
+					
+					
+				답글<br>
+					<%	//------------------------------------게시판 답글 부분 값-------------------------------------------------
+						BBSDAO2 dao2 = new BBSDAO2();
+						BBSDTO2 dto2 = dao2.select(num);
+						String title2 = request.getParameter("title");
+						String write2 = request.getParameter("write");
+						//title2 = URLDecoder.decode(title2,"UTF-8");
+						//write2 = URLDecoder.decode(write2,"UTF-8");
+						
+					%>
+					<table class = "bbs">
+					<tr>
+						<td style ="width: 20%;">글 번호</td>
+						<td colspan = "2" ><%= dto.getNum() %></td>
+					</tr>
+					<tr>
+						<td style ="width: 20%;">제목</td>
+						<td colspan = "2"><%=title2 + "의 답글"%></td>
+					</tr>
+					<tr>
+						<td style ="width: 20%;">작성자</td>
+						<td colspan = "2" ><%= dto2.getId2() %></td>
+					</tr>
+					<tr>
+						<th>작성일</th>
+						<td colspan = "2" ><%= dto2.getDate() %></td>
+					</tr>
+					<tr>
+						<td style ="width: 20%;">내용</td>
+						<td colspan="5" ><%=write2%></td>
+					</tr>
+					</table>
 					<button type = "button" onclick="location.href='BBS.jsp' ">목록</button>
-					<button type = "button">답글</button>
+					<button type = "button" onclick="answer();">답글</button>
 					<button type = "button" onclick="update();">수정</button>
 					</div>			
 					</div>
