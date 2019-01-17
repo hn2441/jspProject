@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import product.AdvertisementDTO;
-
 public class AdvDAO {
 	DBConnectionMgr pool;
 	Connection con;
@@ -141,18 +139,28 @@ public class AdvDAO {
 		ps = con.prepareStatement(sql);
 		rs = ps.executeQuery();
 		
-
 		ArrayList<AdvDTO> list = new ArrayList<>();
 		
-		while(rs.next()) {
+		if(search.equals("")) {
 			dto = new AdvDTO();
 			
-			dto.setNo(rs.getInt("no"));
-			dto.setTitle(rs.getString("title"));
-			dto.setPrice(rs.getString("price"));
-			dto.setImg(rs.getString("img"));
+			dto.setNo(0);
+			dto.setTitle(null);
+			dto.setPrice(null);
+			dto.setImg(null);
 			
 			list.add(dto);
+		} else {
+			while(rs.next()) {
+				dto = new AdvDTO();
+				
+				dto.setNo(rs.getInt("no"));
+				dto.setTitle(rs.getString("title"));
+				dto.setPrice(rs.getString("price"));
+				dto.setImg(rs.getString("img"));
+				
+				list.add(dto);
+			}
 		}
 		
 		pool.freeConnection(con, ps, rs);

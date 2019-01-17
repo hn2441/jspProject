@@ -13,7 +13,7 @@ public class searchDAO {
 		pool = DBConnectionMgr.getInstance();
 	}
 	
-	//yis
+	//yis 검색어 select
 	public searchDTO select(String search) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -30,6 +30,7 @@ public class searchDAO {
 			if(search.equals(rs.getString("search"))) {
 				dto.setSearch(rs.getString("search"));
 				dto.setCount(rs.getInt("count"));
+				dto.setDay(rs.getString("day"));
 			} else {
 				dto.setSearch(null);
 			}
@@ -40,33 +41,41 @@ public class searchDAO {
 		return dto;
 	}// end select()
 	
-	//yis
+	//yis 검색어 insert
 	public void insert(searchDTO dto) throws Exception {
 		PreparedStatement ps = null;
 		
 		con = pool.getConnection();
 		
-		String sql = "insert into search values (?, ?)";
-		ps = con.prepareStatement(sql);
-		ps.setString(1, dto.getSearch());
-		ps.setInt(2, dto.getCount());
-		ps.executeUpdate();
-		
-		System.out.println("sql문 실행 완료");
+		// 넘어온 값이 공백일 경우
+		if(dto.getSearch().equals("")) {
+			
+		//  넘어온 값이 공백이 아닌 경우
+		} else {
+			String sql = "insert into search values (?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getSearch());
+			ps.setInt(2, dto.getCount());
+			ps.setString(3, dto.getDay());
+			ps.executeUpdate();
+			
+			System.out.println("sql문 실행 완료");
+		}
 		
 		pool.freeConnection(con, ps);
 	}// end insert
 	
-	//yis
+	//yis 검색어 update
 	public void update(searchDTO dto) throws Exception {
 		PreparedStatement ps = null;
 		
 		con = pool.getConnection();
 		
-		String sql = "update search set count = ? where search = ?";
+		String sql = "update search set count = ?, day = ? where search = ?";
 		ps = con.prepareStatement(sql);
 		ps.setInt(1, dto.getCount());
-		ps.setString(2, dto.getSearch());
+		ps.setString(2, dto.getDay());
+		ps.setString(3, dto.getSearch());
 		ps.executeUpdate();
 		
 		System.out.println("sql문 실행 완료");
@@ -74,7 +83,7 @@ public class searchDAO {
 		pool.freeConnection(con, ps);
 	}// end update
 	
-	//yis
+	//yis 연관 검색어
 	public ArrayList<searchDTO> searchInc(String search) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -82,7 +91,7 @@ public class searchDAO {
 		
 		con = pool.getConnection();
 		
-		String sql = "select * from search where search like '%" + search + "%'";
+		String sql = "select * from search where search like '%" + search + "%' order by count desc limit 5";
 		ps = con.prepareStatement(sql);
 		rs = ps.executeQuery();
 		
@@ -101,4 +110,31 @@ public class searchDAO {
 		
 		return list;
 	}// end searchInc
+	
+	//yis top5 검색어
+	public ArrayList<searchDTO> topFive(String day) throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		searchDTO dto = null;
+		
+		con = pool.getConnection();
+		
+		String sql = "select * from search where day like '" + day + "%' order by count desc limit 5";
+		ps = con.prepareStatement(sql);
+		rs = ps.executeQuery();
+		
+		ArrayList<searchDTO> list = new ArrayList<>();
+		
+		while(rs.next()) {
+			dto = new searchDTO();
+			
+			dto.setSearch(rs.getString("search"));
+			
+			list.add(dto);
+		}
+		
+		pool.freeConnection(con, ps, rs);
+		
+		return list;
+	}// end topFive
 }
