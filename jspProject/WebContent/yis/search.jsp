@@ -16,7 +16,7 @@
 		<title>IT 개발자들을 위한 프리랜서 마켓</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main1.css" />
 	</head>
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
@@ -37,32 +37,28 @@
 						<nav id="nav">
 							<ul>
 								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="#">마이페이지</a></li>
-								<li><a href="#">찜 목록</a></li>
-								<li><a href="#">찾아 오시는 길</a></li>
-								<li><a href="#">고객 센터</a></li>
+								<li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+								<li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+								<li><a href="googleMap.jsp">찾아 오시는 길</a></li>
+								<li><a href="FAQ.html">고객 센터</a></li>
+								<li>|</li>
+								<%
+								/* 로그인한 세션 값 확인 */
+								if(session.getAttribute("id") == null) {
+								%>
+									<li><a href="#">로그인</a></li> <br>
+									<!-- <li><a href="#">회원가입</a></li> <br>
+									<li><a href="#">로그아웃</a></li> -->
+								<% 
+								} else {
+								%>
+									<li><a href="#">|<%= session.getAttribute("id") %></a></li> <br>
+									<li><a href="#">로그아웃</a></li>
+								<% 	
+								} /* end 로그인한 세션 값 확인 */
+								%>
 							</ul>
 						</nav>
-						
-					<!-- 세션 값 불러오기 -->
-					<% 
-						if(session.getAttribute("id") == null) {
-					%>
-						<ul id="member">
-								<li><a href="#">로그인</a></li> <br>
-								<li><a href="#">회원가입</a></li>
-						</ul>	
-					<% 
-						} else {
-					%>
-						<ul id="member">
-							<li><h3><button name="logout" onclick="">로그아웃</button></h3></li>
-							<li><a href="#"><%= session.getAttribute("id") %></a></li> <br>
-							<li><a href="#"><%= session.getAttribute("category") %></a></li>
-						</ul>
-					<% 	
-						} /* end 세션 값 불러오기 */
-					%>
 				</section>
 				
 		<%		

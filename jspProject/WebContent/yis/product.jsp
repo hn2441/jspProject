@@ -10,7 +10,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main1.css" />
 		
 		<!-- 최근 본 상품 목록 자동 새로 고침  -->
 		<script type="text/javascript">
@@ -33,43 +33,37 @@
 					
 					<!-- Logo -->
 					<div id="logo">
-						<form action="search.jsp">
-							<input type="text" name="search" id="search" style="width: 500px; margin: auto;"><br>
-							<input type="submit" value="검색">
-						</form>
+						
 					</div>
 
 					<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
 						
 						<nav id="nav">
+							<nav id="nav">
 							<ul>
 								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="#">마이페이지</a></li>
-								<li><a href="#">찜 목록</a></li>
-								<li><a href="#">찾아 오시는 길</a></li>
-								<li><a href="#">고객 센터</a></li>
+								<li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+								<li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+								<li><a href="googleMap.jsp">찾아 오시는 길</a></li>
+								<li><a href="FAQ.html">고객 센터</a></li>
+								<li>|</li>
+								<%
+								/* 로그인한 세션 값 확인 */
+								if(session.getAttribute("id") == null) {
+								%>
+									<li><a href="#">로그인</a></li> <br>
+									<!-- <li><a href="#">회원가입</a></li> <br>
+									<li><a href="#">로그아웃</a></li> -->
+								<% 
+								} else {
+								%>
+									<li><a href="#">|<%= session.getAttribute("id") %></a></li> <br>
+									<li><a href="#">로그아웃</a></li>
+								<% 	
+								} /* end 로그인한 세션 값 확인 */
+								%>
 							</ul>
 						</nav>
-						
-					<!-- 세션 값 불러오기 -->
-					<% 
-							if(session.getAttribute("id") == null) {
-					%>
-						<ul id="member">
-								<li><a href="#">로그인</a></li> <br>
-								<li><a href="#">회원가입</a></li>
-						</ul>	
-					<% 
-						} else {
-					%>
-						<ul id="member">
-							<li><h3><button name="logout" onclick="">로그아웃</button></h3></li>
-							<li><a href="#"><%= session.getAttribute("id") %></a></li> <br>
-							<li><a href="#"><%= session.getAttribute("category") %></a></li>
-						</ul>
-					<% 	
-						} /* end 세션 등록 */
-				%>
 				</section>
 		
 		<section id="highlights" class="wrapper style3">
