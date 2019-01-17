@@ -16,7 +16,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-
 </script>
 <title>Insert title here</title>
 </head>
@@ -31,6 +30,8 @@ a, a:hover {
 /*글자에 검은바탕으로 해서  마우스를 갖다대면 나타나게 하는 css이다.*/
 </style>
 <body>
+<h1 align="center">고객센터 상담 목록 리스트</h1>
+<hr>
 	<jsp:useBean id="dao" class="bean.ServiceDAO" />
 	<%
 				/*serviceDTO에서 DAO의  selectAll()에서 리스트를 보여준다.  */
