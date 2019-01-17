@@ -145,8 +145,9 @@
 													<td style="width: 2%;">내</td>
 													<td style="width: 2%;">용</td>
 													<td style="width: 2%;"></td>
-													<td><input type="text" id="content" name="content"
-														style="height: 200px;"></td>
+													<td>
+														<textarea id="content" name="content" style="height: 200px;">
+														</textarea></td>
 												</tr>
 												<tr>
 													<td colspan="6" style="height: 20px"></td>

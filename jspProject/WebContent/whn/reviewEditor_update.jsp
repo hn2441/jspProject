@@ -134,9 +134,9 @@ input[type="radio"] {
 										<td style="width: 20px;"></td>
 										<td style="width: 20px;"></td>
 										<td style="width: 15px;">뷰</td>
-										<td colspan="4"><input type="text" name="content"
-											value="<%=rdto.getContent() %>"
-											style="width: 600px; height: 200px;"></td>
+										<td colspan="4">
+											<textarea id="content" name="content" style="height: 200px;"><%=rdto.getContent() %></textarea>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="6" style="width: 250px;"></td>

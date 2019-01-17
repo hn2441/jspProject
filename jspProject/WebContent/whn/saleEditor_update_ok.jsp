@@ -1,3 +1,5 @@
+<%@page import="java.util.Enumeration"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="bean.AdvDTO"%>
 <%@page import="bean.AdvDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,15 +12,32 @@
 			String no = request.getParameter("no");
 			int adno=0;
 			if(no!=null){
-		adno = Integer.parseInt(no);
+				adno = Integer.parseInt(no);
 			}else{
 	    		adno = Integer.parseInt(request.getParameter("adno"));
 	    	}
-			String sid = (String)session.getAttribute("id");
-			String title = request.getParameter("title");
-			String price = request.getParameter("price");
-			String content = request.getParameter("content");
-			String img = request.getParameter("img");
+			//경로 지정
+			String uploadPath = config.getServletContext().getRealPath("images\\productImg");
+			int size = 10 * 1024 * 1024;
+			
+			MultipartRequest multi = null;
+			try{
+				multi = new MultipartRequest(
+					request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
+				
+				//넘어온 값 받아오기
+				adto.setSid((String)session.getAttribute("id"));
+				adto.setTitle(multi.getParameter("title"));
+				adto.setPrice(multi.getParameter("price"));
+				adto.setContent(multi.getParameter("content"));
+				
+				Enumeration files = multi.getFileNames();
+				String file = (String)files.nextElement();
+				String img = "..\\images\\productImg\\"+multi.getFilesystemName(file);
+				if(img==null || img.equals("")){
+					img=multi.getParameter("img");
+				}
+				adto.setImg(img);
 			
 			AdvDAO adao = new AdvDAO();
 			AdvDTO adto = new AdvDTO(sid,title,price,content,img);

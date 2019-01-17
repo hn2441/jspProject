@@ -17,15 +17,8 @@
 <body>
 	<%
 	boolean b = true;
-	String b1 = null;
-		if(b){
-			b1="판매자";
-		}else{
-			b1="구매자";
-		}
 	session.removeAttribute("id");
-	session.setAttribute("id", "m110"); //로그인 처리 하면 지우는 부분
-	session.setAttribute("category", b1);
+	session.setAttribute("id", "s100"); //로그인 처리 하면 지우는 부분
 	int adno = 1; //adv테이블에서 가지고 오려면 필요한 부분
 	%>
 	id : <%=session.getAttribute("id") %><br>

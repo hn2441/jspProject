@@ -55,7 +55,7 @@
 		var img = document.getElementById("img").value;
 		
 		/* 빈칸 있을시 알림 띄워줌 */
-		if(title=="" || price=="" || content=="" || img==""){
+		if(title=="" || price=="" || content==""){
 			alert("빈칸이 있습니다. 확인해주세요.");
 			return false;
 		}else{
@@ -155,8 +155,8 @@
 													<td style="width: 2%;">내</td>
 													<td style="width: 2%;">용</td>
 													<td style="width: 2%;"></td>
-													<td><input type="text" id="content" name="content"
-														style="height: 200px;" value="<%=adto.getContent()%>">
+													<td>
+														<textarea id="content" name="content" style="height: 200px;"><%=adto.getContent()%></textarea>
 													</td>
 												</tr>
 												<tr>
@@ -168,8 +168,11 @@
 													<td style="width: 2%;">첨</td>
 													<td style="width: 2%;">부</td>
 													<td style="width: 2%;"></td>
-													<td><input type="text" id="img" name="img"
-														value="<%=adto.getImg()%>"></td>
+													<td>
+														<img src="<%=adto.getImg()%>" style="width: 10%">
+														<input type="hidden" name="img" value="<%=adto.getImg()%>">
+														<input type="file" id="img" name="img" style="width: 78px">
+													</td>
 												</tr>
 												<tr>
 													<td style="height: 70px"><input type="hidden"
