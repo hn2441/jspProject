@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width-device-width", initial-scale="1">
+<link rel="stylesheet" href="css/bootstrap.css">
+
+
+
+<title></title>
+</head>
+<body>
+<hr>
+<font color="white" size="6">크몽 고객센터 게시판입니다.</font>
+<hr>
+<form action="boardInsert.jsp">
+<div class="container">
+ <table class="table table-hover">
+<tbody>
+	<tr> 
+		<tbody>
+	    		<tr><!--placeholder에서는 글내용어떤식으로 쓸지 작성예제 --><!-- maxlenght="몇자까지쓸지제한 " -->
+	    			<td><input type="text" class="form-control" placeholder="글제목은 50자이내로 작성해주세요" name="title" maxlength="50"></td>
+	    		</tr>
+	    		<tr>
+	    			<td><input type="text" class="form-control" placeholder="이메일" name="email" maxlength="50"></td>
+	    		</tr>
+	    		<tr>
+	    			<td><input type="password" class="form-control" placeholder="패스워드는 15자리 이하만 작성해주세요" name="pw" maxlength="50"></td>
+	    		</tr>
+	    		<tr>
+	    			<td><textarea class="form-control" placeholder="글 내용은 2048자 이내로 작성해주세요" name="content" maxlength="2048" style="height:450px;"></textarea></td>	    																																																							
+	    		</tr>
+	    	</tbody>	    	
+ 	<tr>
+ 	<td>
+ 	<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+ 	<input type="reset" class="btn btn-primary pull-right" value="초기화">
+ 	</td>
+ 	</tr>
+ 	</tbody>
+</table>
+</div>
+</form>
+</body>
+</html>
