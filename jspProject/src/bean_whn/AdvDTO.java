@@ -1,4 +1,4 @@
-package bean_whn;
+package bean;
 
 public class AdvDTO {
 	private int no;
@@ -8,8 +8,18 @@ public class AdvDTO {
 	private String content;
 	private String img;
 	
-	
-	
+	public AdvDTO() {
+	}
+	public AdvDTO(String sid, String title, String price, String content, String img) {
+		super();
+		this.sid = sid;
+		this.title = title;
+		this.price = price;
+		this.content = content;
+		this.img = img;
+	}
+
+
 	public int getNo() {
 		return no;
 	}

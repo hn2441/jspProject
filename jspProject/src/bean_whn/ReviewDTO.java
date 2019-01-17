@@ -1,4 +1,4 @@
-package bean_whn;
+package bean;
 
 public class ReviewDTO {
 	private int no;
@@ -9,11 +9,22 @@ public class ReviewDTO {
 	private int starsc;
 	private String date;
 	
-	
-	int getNo() {
+	public ReviewDTO() {
+	}
+	public ReviewDTO(String mid, String sid, int adno, String content, int starsc, String date) {
+		super();
+		this.mid = mid;
+		this.sid = sid;
+		this.adno = adno;
+		this.content = content;
+		this.starsc = starsc;
+		this.date = date;
+	}
+
+	public int getNo() {
 		return no;
 	}
-	void setNo(int no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getMid() {
@@ -30,10 +41,10 @@ public class ReviewDTO {
 		this.sid = sid;
 	}
 	
-	int getAdno() {
+	public int getAdno() {
 		return adno;
 	}
-	void setAdno(int adno) {
+	public void setAdno(int adno) {
 		this.adno = adno;
 	}
 	
@@ -50,7 +61,7 @@ public class ReviewDTO {
 	public void setStarsc(int starsc) {
 		this.starsc = starsc;
 	}
-	String getDate() {
+	public String getDate() {
 		return date;
 	}
 	void setDate(String date) {

@@ -22,7 +22,7 @@
  * TO THE SOFTWARE.
  *
  */
-package bean_whn;
+package bean;
 
 import java.sql.*;
 import java.util.Properties;
@@ -30,7 +30,7 @@ import java.util.Vector;
 public class DBConnectionMgr {
     private Vector connections = new Vector(10);
     private String _driver = "com.mysql.jdbc.Driver",
-    _url = "jdbc:mysql://localhost:3306/jspproject",
+    _url = "jdbc:mysql://127.0.0.1:3306/jspproject",
     _user = "root",
     _password = "1234";
     private boolean _traceOn = false;

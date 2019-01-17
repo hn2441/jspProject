@@ -1,15 +1,24 @@
-package bean_whn;
+package bean;
 
 public class CartDTO {
-	private String mid;
+	private String Id;
 	private int adno;
 	private String date;
 	
-	public String getMid() {
-		return mid;
+	public CartDTO() {
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public CartDTO(String Id, int adno,String date) {
+		super();
+		this.Id = Id;
+		this.adno = adno;
+		this.date = date;
+	}
+
+	public String getId() {
+		return Id;
+	}
+	public void setId(String Id) {
+		this.Id = Id;
 	}
 	
 	public int getAdno() {
@@ -25,6 +34,7 @@ public class CartDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 	
 	
 	
