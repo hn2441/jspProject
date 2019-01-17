@@ -44,28 +44,26 @@
 					<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
 						<nav id="nav">
 							<ul>
-								<li class="current"><a href="main.jsp">홈</a></li>
-								<li><a href="idCheck.jsp?p=m">마이페이지</a></li>
-								<li><a href="idCheck.jsp?p=c">찜 목록</a></li>
-								<li><a href="googleMap.jsp">찾아 오시는 길</a></li>
-								<li><a href="FAQ.html">고객 센터</a></li>
-								<li>|</li>
-								<%
-								/* 로그인한 세션 값 확인 */
-								if(session.getAttribute("id") == null) {
-								%>
-									<li><a href="#">로그인</a></li> <br>
-									<!-- <li><a href="#">회원가입</a></li> <br>
-									<li><a href="#">로그아웃</a></li> -->
-								<% 
-								} else {
-								%>
-									<li><a href="#">|<%= session.getAttribute("id") %></a></li> <br>
-									<li><a href="#">로그아웃</a></li>
-								<% 	
-								} /* end 로그인한 세션 값 확인 */
-								%>
-							</ul>
+		                        <li class="current"><a href="main.jsp">홈</a></li>
+		                        <li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+		                        <li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+		                        <li><a href="googleMap.jsp">찾아 오시는 길</a></li>
+		                        <li><a href="FAQ.html">고객 센터</a></li>
+		                        <li>|</li>
+		                   		 <%
+				                  /* 로그인한 세션 값 확인 */
+				                     if(session.getAttribute("id") == null) {
+				                  %>
+				                        <li><a href="loginPage.jsp">로그인</a></li>
+				                  <% 
+				                     } else {
+				                  %>
+				                        <li><a href="#"><%= session.getAttribute("id") %></a></li>
+				                        <li><a href="logout.jsp">로그아웃</a></li>
+				                  <%    
+				                     } /* end 로그인한 세션 값 확인 */
+				                  %>
+		                     </ul>
 						</nav>
 				</section>
 				
