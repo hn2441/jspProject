@@ -1,0 +1,21 @@
+//  search Talbe 생성
+create table search(search varchar(150), count int not null default 0, day varchar(50));
+
+//  search 데이터 insert
+insert into search values ('k', 4, '2019.01.17');
+insert into search values ('상품 제목', 1, '2019.01.17');
+insert into search values ('iii', 1, '2019.01.17');
+insert into search values ('상', 3, '2019.01.17');
+insert into search values ('반응', 1, '2019.01.17');
+insert into search values ('ka', 14, '2019.01.17');
+insert into search values ('제목', 1, '2019.01.17');
+insert into search values ('반응형 홈페이지', 5, '2019.01.17');
+insert into search values ('홈페이지', 3, '2019.01.17');
+
+//	adv 데이터 insert
+insert into adv values (1, 'h-01', '반응형 홈페이지 제작', '444.000', '고급 퀼리티의 반응형 홈페이지로 기업 홍보에 도움을 드립니다.', 'images\productImg\kmong1.jpg');
+insert into adv values (2, 'h-02', 'WEB DREAN', '490.000', '홈페이지 디자인부터 제작까지 고급스럽게', 'images\productImg\kmong2.jpg');
+insert into adv values (3, 'h-03', '소셜 네트워크 서비스 네이티브', '2.200.000', '소셜 네트워크 서비스 APP 제적해 드립니다.', 'images\productImg\kmong3.jpg');
+insert into adv values (4, 'h-04', '안드로이드 앱 개발', '50.000', '안드로이드 앱 개발해 드립니다.', 'images\productImg\kmong4.jpg');
+insert into adv values (5, 'h-05', 'DB 설계', '100.000', 'DB 설계해 드립니다.', 'images\productImg\kmong5.jpg');
+
