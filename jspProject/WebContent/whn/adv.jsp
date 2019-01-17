@@ -1,16 +1,26 @@
+<%@page import="bean.CartDTO"%>
+<%@page import="bean.CartDAO"%>
+<%@page import="bean.AdvDTO"%>
+<%@page import="bean.AdvDAO"%>
+<%@page import="bean.SalesDAO"%>
+<%@page import="bean.MemberDTO"%>
+<%@page import="bean.MemberDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="bean.ReviewDTO"%>
+<%@page import="bean.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
-	Escape Velocity by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	판매글 페이지 입니다. 글 고유번호 받아와서 띄워줍니다.
+	판매글 / 리뷰3개 / 네임카드 띄워줍니다
 -->
 <html>
 <head>
 <title>판매 페이지 입니다.</title>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
 <style type="text/css">
 #heart {
@@ -18,6 +28,7 @@
 	width: 25px;
 	height: 22.5px;
 }
+
 #heart:before, #heart:after {
 	position: absolute;
 	content: "";
@@ -30,68 +41,96 @@
 	transform: rotate(-45deg);
 	transform-origin: 0 100%
 }
+
 #heart:after {
 	left: 0;
 	transform: rotate(45deg);
 	transform-origin: 100% 100%;
 }
+
 #heart:hover {
 	background: #fcc8c4;
 }
-
 </style>
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body class="right-sidebar is-preload">
-<%
-	session.setAttribute("id", "아이디"); //로그인 처리 하면 지우는 부분
-	session.setAttribute("adno", "12345"); //글 불러올때 adv 테이블에서 가져올 부분
-	session.setAttribute("sid", "판매자 아이디"); //글 불러올 때 adv 테이블에서 가져올 부분
-	
-	//전체 리뷰 갯수 가져와서 갯수 받아오는 부분
-/* 	ReviewDAO dao = new ReviewDAO();
-	int count = dao.selectAllCounter(); */
-	int count = 14;
-%>
+	<%
+		//메인페이지에서 넘어오는 글 고유번호 받기
+		//no으로 넘어오든, adno으로 넘어오든 받을 수 있음
+		String no = request.getParameter("no");
+		int adno = 0;
+		if(no!=null){
+			adno = Integer.parseInt(no);
+		}else{
+			adno = Integer.parseInt(request.getParameter("adno"));
+		}
+		
+		//판매글 올리는 부분
+		AdvDAO adao = new AdvDAO();
+		AdvDTO adto = null;
+		//판매자 아이디 판매글 번호로 받아옴		
+		String sid = adao.selectAdv(adno).getSid();
+		
+		//네임카드에 올릴 판매자 정보가 필요해서 호출함
+		MemberDAO mdao = new MemberDAO();
+		MemberDTO mdto = null;
+		
+		//결제여부가 확인되면 구매자에게 판매지 이메일을 네임카드 위에 출력
+		SalesDAO sdao = new SalesDAO();
+		
+		//리뷰
+	 	ReviewDAO rdao = new ReviewDAO();
+		ReviewDTO rdto = null;
+		//판매자 아이디에 해당하는 리뷰 개수
+		ArrayList<ReviewDTO> list = rdao.selectSidReview(sid);
+		int count = list.size();
+		
+		//찜하기
+		CartDAO cdao = new CartDAO();
+		CartDTO cdto = null;
+		
+		//Sales테이블의 결제 개수가 Review테이블의 결제 개수보다 많을 경우만 '리뷰작성'버튼이 보임	
+		//한 구매자가 한 판매자의 상품을 결제한 갯수만큼 리뷰를 쓸 수 있음
+		//Sales테이블의 결제 개수가 1회 이상일 경우 판매자의 아이디(이메일)을 출력해줌
+		//ckS : Sales 테이블 체크, ckR : 리뷰 테이블 체크
+		int ckS = sdao.selectCheckPayment(sid,(String)session.getAttribute("id"));
+		int ckR = rdao.selectCheckPayment(sid,(String)session.getAttribute("id"));
+	%>
 	<div id="page-wrapper">
 
 		<!-- Header -->
 		<section id="header" class="wrapper">
 
 			<!-- Logo -->
-			<div id="logo">
-				<h1>
-					<a href="index.html">상단 큰글씨</a>
-				</h1>
-				<p>상단 작은글씨</p>
-			</div>
+			<div id="logo"></div>
 
-			<!-- Nav -->
+			<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
+
 			<nav id="nav">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#">Dropdown</a>
-						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Magna veroeros</a></li>
-							<li><a href="#">Etiam nisl</a></li>
-							<li><a href="#">Sed consequat</a>
-								<ul>
-									<li><a href="#">Lorem dolor</a></li>
-									<li><a href="#">Amet consequat</a></li>
-									<li><a href="#">Magna phasellus</a></li>
-									<li><a href="#">Etiam nisl</a></li>
-									<li><a href="#">Sed feugiat</a></li>
-								</ul></li>
-							<li><a href="#">Nisl tempus</a></li>
-						</ul></li>
-					<li><a href="left-sidebar.html">Left Sidebar</a></li>
-					<li class="current"><a href="right-sidebar.html">Right
-							Sidebar</a></li>
-					<li><a href="no-sidebar.html">No Sidebar</a></li>
+					<li class="current"><a href="main.jsp">홈</a></li>
+					<li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+					<li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+					<li><a href="googleMap.html">찾아 오시는 길</a></li>
+					<li><a href="FAQ.html">고객 센터</a></li>
+					<li>|</li>
+					<%
+		            /* 로그인한 세션 값 확인 */
+		               if(session.getAttribute("id") == null) {
+		            %>
+					<li><a href="loginPage.jsp">로그인</a></li>
+					<% 
+		               } else {
+		            %>
+					<li><a href="#"><%= session.getAttribute("id") %></a></li>
+					<li><a href="logout.jsp">로그아웃</a></li>
+					<%    
+		               } /* end 로그인한 세션 값 확인 */
+		            %>
 				</ul>
 			</nav>
-
+			<div></div>
 		</section>
 
 		<!-- Main -->
@@ -103,70 +142,100 @@
 
 						<!-- Content -->
 						<div id="content">
-							<a href="saleEditor_update.jsp" class="crud1">수정</a>
-							<a href="#" class="crud1">삭제</a>
+							<%//판매글 올라오는 부분. 세션에 있는 id와 글쓴이 id가 일치할 경우 수정삭제 링크가 보임
+						if(sid.equals(session.getAttribute("id"))){ %>
+							<a href="saleEditor_update.jsp?no=<%=adno %>" class="crud1">수정</a>
+							<a href="saleEditor_delete_ok.jsp?no=<%=adno %>" class="crud1">삭제</a>
+							<%} %>
 							<article class="box post">
 								<header class="style1">
-									<div>
+									<div style="text-align: left; padding: 3%">
+										<%//판매글 
+										adto = adao.selectAdv(adno);
+										%>
+										<h2 name="title"><%=adto.getTitle() %></h2>
 									</div>
-									<h2 name="title">판매글 페이지 제목</h2>
-									<div class="row gtr-150">
-										<div class="col-6 col-12-small">
+									<div class="row gtr-150"
+										style="height: 100px; font-size: 20px;">
+										<div class="col-6 col-12-small" style="padding: 3%;">
 											<section class="box">
-												<div>
-													<p>가격</p>
-													<p>내용내용내용내용내용내용내용내용내용내용내용내용</p>
-												</div>
-											</section>
-										</div>
-										<div class="col-6 col-12-small">
-											<section class="box">
-												<div>
-													<p>가격</p>
-													<p>내용내용내용내용내용내용내용내용내용내용내용내용</p>
-												</div>
-
+												<%=adto.getPrice() %>
 											</section>
 										</div>
 									</div>
 								</header>
-								<img src="../images/pic01.jpg" alt="" style="width: 800px"/>
-								<p>본문 시작Fringilla nisl. Donec accumsan interdum nisi, quis
-									tincidunt felis sagittis eget. odio eleifend. Duis commodo
-									fringilla commodo. Aliquam erat volutpat. Vestibulum facilisis
-									leo magna. Cras sit amet urna eros, id egestas urna. Quisque
-									aliquam tempus euismod. Vestibulum ante ipsum primis in
-									faucibus.</p>
-								<p>Phasellus nisl nisl, varius id porttitor sed,
-									pellentesque ac orci. Pellentesque habitant morbi tristique
-									senectus et netus et malesuada fames ac turpis egestas. Morbi
-									bibendum justo sed mauris vehicula malesuada aliquam elit
-									imperdiet. Aliquam eu nibh lorem, eget gravida mi. Duis odio
-									diam, luctus et vulputate vitae, vehicula ac dolor.
-									Pellentesque at urna eget tellus lobortis ultrices sed non
-									erat. Donec eget erat non magna volutpat malesuada quis eget
-									eros. Nullam sodales cursus sapien, id consequat leo suscipit
-									ut. Praesent id turpis vitae turpis pretium ultricies.
-									Vestibulum sit amet risus elit.</p>
+								<div class="row gtr-150">
+									<div class="col-6 col-12-small">
+										<section class="box"></section>
+									</div>
+								</div>
+								<a href="#" class="image featured"> <!-- 이미지 첨부 --> <img
+									src="<%=adto.getImg() %>" alt="" style="width: 95%" />
+								</a>
+								<p
+									style="height: 300px; background-color: #F2F2F2; padding: 3%;">
+									<font style="font-size: 20px; color: #717479;"> <%=adto.getContent() %>
+									</font>
+								</p>
 
 								<div>
 									<ul class="style2">
-										<%
-										//리뷰 3개만 출력해줌
-										for(int i=0;i<3;i++){
-										%><li style="font-size: 17px">
+										<%	//리뷰 3개만 출력해줌, 리뷰가 3개 이하면 있는 리뷰만 출력해줌
+										int k = 3; //출력할 리뷰 갯수
+										if(count<3){
+											k = count;
+										}											
+											for(int i=0;i<k;i++){
+											%><li style="font-size: 17px">
 											<article>
 												<h3>
-													<a href="#"> 아이디 : <%=count-i %>번째 아이디 | 별점</a>
+													<%	rdto = list.get(list.size()-1-i);
+															String mid = rdto.getMid();
+															String mid2 = "";
+	
+															//리뷰 작성자 아이디중 앞에 2글자만 그대로 출력하고 나머지는 *로 출력해줌
+															for(int j=0;j<mid.length();j++){
+																if(j>1){
+																	mid2 += "*";
+																}else{
+																	mid2 += mid.charAt(j);
+																}
+																
+															}
+														%>
+													<a href="#"> <%=count-i %>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=mid2 %> | 별점 <%
+														int starsc = rdto.getStarsc();
+														for(int j=0; j<5;j++){
+															if(j<starsc){
+																out.print("★");
+															}//end if
+														}//end for
+														%></a>
 												</h3>
-												<p>리뷰내용 Duis odio diam, luctus et vulputate vitae, vehicula
-													ac dolor. Pellentesque at urna eget tellus sed etiam.</p>
+												<p><%=rdto.getContent() %></p>
 											</article>
 										</li>
 										<%
-										}
-									%>
-										<li><a href="review.jsp" class="button style1">더 보기</a></li>
+											}//end for
+											%>
+										<li>
+											<div align="right">
+												<form action="reviewEditor_insert.jsp" method="post">
+													<!-- 주문갯수가 리뷰 갯수보다 많을때만 리뷰 작성 가능 -->
+													<%if(ckS > ckR){ %>
+													<input type="hidden" name="sid" value="<%=sid%>"> <input
+														type="hidden" name="adno" value="<%=adno%>">
+													<button class="button style1">
+														<font style="font-size: 15px">리뷰작성</font>
+													</button>
+													<%}%>
+													<!-- 판매자에 구매한 모든 리뷰를 출력해줌 -->
+													<a href="review.jsp?adno=<%=adno %>" class="button style1">
+														리뷰 보기</a>
+												</form>
+											</div>
+										</li>
 									</ul>
 								</div>
 							</article>
@@ -179,206 +248,45 @@
 						<div id="sidebar">
 							<section class="box">
 								<header>
-									<h2>네임카드</h2>
-									<a href="#" id="heart"></a>
+									<%	//네임카드에 올릴 정보를 받아옴
+										mdto=mdao.selectNameCard(sid);									
+									%>
+									<div align="center">
+										<!-- 세션에 아이디값이 있는 경우에만 보입니다. -->
+										<%if(session.getAttribute("id") != null){ %>
+										<a id="heart"
+											href="cartEditor.jsp?adno=<%=adno%>&id=<%=session.getAttribute("id")%>"></a>
+										<%} %>
+									</div>
+									<p style="font-size: 20px; color: black;">
+										<b>네임카드</b>
+									</p>
 								</header>
 							</section>
 							<section class="box">
 								<ul class="style2">
 									<li>
-										<article class="box post-excerpt">
-											<a href="#" class="image left"><img
-												src="../images/pic08.jpg" alt="" /></a>
+										<div align="left">
+											<!--닉네임만 출력 -->
 											<h3>
-												<a href="#">닉네임</a>
-											</h3>
-											<p>닉네임</p>
-										</article>
+												닉네임 :
+												<%=mdto.getName() %></h3>
+											<!-- 결제를 했을 경우만 판매자 연락처 띄워줌 -->
+											<%if(ckS>0){ %>
+											<h3>
+												연락처 :
+												<%=sid %></h3>
+											<%}//end if %>
+										</div>
 									</li>
 								</ul>
-								<br> <a href="#" class="button style1">주문하기</a>
-							</section>
-							<section class="box">
-								<header>
-									<h2>그 외 링크</h2>
-								</header>
-								<ul class="style3">
-									<li><a href="#">링크1Nulla iaculis egestas varius</a></li>
-									<li><a href="#">링크2Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">링크3Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">링크4Sed hendrerit massa nam mattis</a></li>
-									<li><a href="#">링크5Turpis vel leo accumsan aliquet</a></li>
-									<li><a href="#">링크6Dapibus mi fermentum fusce non</a></li>
-									<li><a href="#">링크7Arcu laoreet sapien tempus</a></li>
-									<li><a href="#">링크8Nulla iaculis egestas varius</a></li>
-									<li><a href="#">링크9Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">링크10Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">링크11Sed hendrerit massa nam mattis</a></li>
-								</ul>
+								<!-- bbs로 연결 -->
+								<br> <a href="bbs.jsp?" class="button style1">주문하기</a>
 							</section>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</section>
-
-		<!-- Highlights -->
-		<section id="highlights" class="wrapper style3">
-			<div class="title">The Endorsements</div>
-			<div class="container">
-				<div class="row aln-center">
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img
-								src="../images/pic02.jpg" alt="" /></a>
-							<h3>
-								<a href="#">Aliquam diam consequat</a>
-							</h3>
-							<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-								ante, dolor aliquet sit amet vulputate mattis amet laoreet
-								lorem.</p>
-							<ul class="actions">
-								<li><a href="#" class="button style1">Learn More</a></li>
-							</ul>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img
-								src="../images/pic03.jpg" alt="" /></a>
-							<h3>
-								<a href="#">Nisl adipiscing sed lorem</a>
-							</h3>
-							<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-								ante, dolor aliquet sit amet vulputate mattis amet laoreet
-								lorem.</p>
-							<ul class="actions">
-								<li><a href="#" class="button style1">Learn More</a></li>
-							</ul>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img
-								src="../images/pic04.jpg" alt="" /></a>
-							<h3>
-								<a href="#">Mattis tempus lorem</a>
-							</h3>
-							<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-								ante, dolor aliquet sit amet vulputate mattis amet laoreet
-								lorem.</p>
-							<ul class="actions">
-								<li><a href="#" class="button style1">Learn More</a></li>
-							</ul>
-						</section>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Footer -->
-		<section id="footer" class="wrapper">
-			<div class="title">The Rest Of It</div>
-			<div class="container">
-				<header class="style1">
-					<h2>Ipsum sapien elementum portitor?</h2>
-					<p>
-						Sed turpis tortor, tincidunt sed ornare in metus porttitor mollis
-						nunc in aliquet.<br /> Nam pharetra laoreet imperdiet volutpat
-						etiam feugiat.
-					</p>
-				</header>
-				<div class="row">
-					<div class="col-6 col-12-medium">
-
-						<!-- Contact Form -->
-						<section>
-							<form method="post" action="#">
-								<div class="row gtr-50">
-									<div class="col-6 col-12-small">
-										<input type="text" name="name" id="contact-name"
-											placeholder="Name" />
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="text" name="email" id="contact-email"
-											placeholder="Email" />
-									</div>
-									<div class="col-12">
-										<textarea name="message" id="contact-message"
-											placeholder="Message" rows="4"></textarea>
-									</div>
-									<div class="col-12">
-										<ul class="actions">
-											<li><input type="submit" class="style1" value="Send" /></li>
-											<li><input type="reset" class="style2" value="Reset" /></li>
-										</ul>
-									</div>
-								</div>
-							</form>
-						</section>
-
-					</div>
-					<div class="col-6 col-12-medium">
-
-						<!-- Contact -->
-						<section class="feature-list small">
-							<div class="row">
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-home">Mailing Address</h3>
-										<p>
-											Untitled Corp<br /> 1234 Somewhere Rd<br /> Nashville, TN
-											00000
-										</p>
-									</section>
-								</div>
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-comment">Social</h3>
-										<p>
-											<a href="#">@untitled-corp</a><br /> <a href="#">linkedin.com/untitled</a><br />
-											<a href="#">facebook.com/untitled</a>
-										</p>
-									</section>
-								</div>
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-envelope">Email</h3>
-										<p>
-											<a href="#">info@untitled.tld</a>
-										</p>
-									</section>
-								</div>
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-phone">Phone</h3>
-										<p>(000) 555-0000</p>
-									</section>
-								</div>
-							</div>
-						</section>
-
-					</div>
-				</div>
-				<div id="copyright">
-					<ul>
-						<li>&copy; Untitled.</li>
-						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
-
-	</div>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.dropotron.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
 </body>
 </html>

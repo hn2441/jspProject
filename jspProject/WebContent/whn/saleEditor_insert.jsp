@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
-	Escape Velocity by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	판매글 입력 페이지
+	판매자가 자신의 판매글 리스트에서만 들어올 수 있음
+
 -->
 <html>
 <head>
@@ -14,37 +14,54 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
 <style type="text/css">
-	#heart {
-		position: relative;
-		width: 25px;
-		height: 22.5px;
-	}
-	
-	#heart:before, #heart:after {
-		position: absolute;
-		content: "";
-		left: 12.5px;
-		top: 0px;
-		width: 12.5px;
-		height: 20px;
-		background: #f98780;
-		border-radius: 12.5px 12.5px 0 0;
-		transform: rotate(-45deg);
-		transform-origin: 0 100%
-	}
-	
-	#heart:after {
-		left: 0;
-		transform: rotate(45deg);
-		transform-origin: 100% 100%;
-	}
-	
-	#heart:hover {
-		background: #fcc8c4;
-	}
+#heart {
+	position: relative;
+	width: 25px;
+	height: 22.5px;
+}
+
+#heart:before, #heart:after {
+	position: absolute;
+	content: "";
+	left: 12.5px;
+	top: 0px;
+	width: 12.5px;
+	height: 20px;
+	background: #f98780;
+	border-radius: 12.5px 12.5px 0 0;
+	transform: rotate(-45deg);
+	transform-origin: 0 100%
+}
+
+#heart:after {
+	left: 0;
+	transform: rotate(45deg);
+	transform-origin: 100% 100%;
+}
+
+#heart:hover {
+	background: #fcc8c4;
+}
 </style>
 
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<script type="text/javascript">
+	/* 빈칸 확인하는 함수 */
+	function checkEmpty() {
+		var title = document.getElementById("title").value;
+		var price = document.getElementById("price").value;
+		var content = document.getElementById("content").value;
+		var img = document.getElementById("img").value;
+
+		/* 빈칸 있을시 알림 띄워줌 */
+		if (title == "" || price == "" || content == "" || img == "") {
+			alert("빈칸이 있습니다. 확인해주세요.");
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 </head>
 <body class="right-sidebar is-preload">
 	<div id="page-wrapper">
@@ -53,40 +70,36 @@
 		<section id="header" class="wrapper">
 
 			<!-- Logo -->
-			<div id="logo">
-				<h1>
-					<a href="index.html">상단 큰글씨</a>
-				</h1>
-				<p>상단 작은글씨</p>
-			</div>
+			<div id="logo"></div>
 
-			<!-- Nav -->
+			<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
+
 			<nav id="nav">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#">Dropdown</a>
-						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Magna veroeros</a></li>
-							<li><a href="#">Etiam nisl</a></li>
-							<li><a href="#">Sed consequat</a>
-								<ul>
-									<li><a href="#">Lorem dolor</a></li>
-									<li><a href="#">Amet consequat</a></li>
-									<li><a href="#">Magna phasellus</a></li>
-									<li><a href="#">Etiam nisl</a></li>
-									<li><a href="#">Sed feugiat</a></li>
-								</ul></li>
-							<li><a href="#">Nisl tempus</a></li>
-						</ul></li>
-					<li><a href="left-sidebar.html">Left Sidebar</a></li>
-					<li class="current"><a href="right-sidebar.html">Right
-							Sidebar</a></li>
-					<li><a href="no-sidebar.html">No Sidebar</a></li>
+					<li class="current"><a href="main.jsp">홈</a></li>
+					<li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+					<li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+					<li><a href="googleMap.html">찾아 오시는 길</a></li>
+					<li><a href="FAQ.html">고객 센터</a></li>
+					<li>|</li>
+					<%
+						/* 로그인한 세션 값 확인 */
+						if (session.getAttribute("id") == null) {
+					%>
+					<li><a href="loginPage.jsp">로그인</a></li>
+					<%
+						} else {
+					%>
+					<li><a href="#"><%=session.getAttribute("id")%></a></li>
+					<li><a href="logout.jsp">로그아웃</a></li>
+					<%
+						} /* end 로그인한 세션 값 확인 */
+					%>
 				</ul>
 			</nav>
-
+			<div></div>
 		</section>
+
 		<!-- Main -->
 		<section id="main" class="wrapper style2">
 			<div class="title">Right Sidebar</div>
@@ -97,48 +110,34 @@
 						<!-- Content -->
 						<div id="content">
 							<article class="box post">
-								<header class="style1">
-								</header>
-									<div class="row gtr-150">
-										<div class="col-6 col-12-small">
-											<form name="saleEditor" method="post" action="saleEditor_insert_ok.jsp">
+								<header class="style1"> </header>
+								<div class="row gtr-150">
+									<div class="col-6 col-12-small">
+										<form id="temp" method="post"
+											action="saleEditor_insert_ok.jsp"
+											enctype="multipart/form-data">
 											<table style="width: 200%">
 												<tr>
 													<td style="width: 2%">제</td>
-													<td style="width: 2%;">　</td>
-													<td style="width: 2%;">　</td>
+													<td style="width: 2%;"></td>
+													<td style="width: 2%;"></td>
 													<td style="width: 2%;">목</td>
 													<td style="width: 2%;"></td>
-													<td colspan="3"><input type="text" name="title" value=""></td>
+													<td><input type="text" id="title" name="title"></td>
 												</tr>
 												<tr>
-													<td colspan="6" style="height : 20px"></td>
+													<td colspan="6" style="height: 20px"></td>
 												</tr>
 												<tr>
 													<td style="width: 2%;">가</td>
-													<td style="width: 2%;">　</td>
-													<td style="width: 2%;">　</td>
+													<td style="width: 2%;"></td>
+													<td style="width: 2%;"></td>
 													<td style="width: 2%;">격</td>
 													<td style="width: 2%;"></td>
-													<td><input type="text" name="price11"></td>
-													<td style="width: 0.5%;"></td>
-													<td><input type="text" name="price21"></td>
+													<td><input type="text" id="price" name="price"></td>
 												</tr>
 												<tr>
-													<td colspan="6" style="height : 5px"></td>
-												</tr>
-												<tr>
-													<td style="width: 2%;">내</td>
-													<td style="width: 2%;">　</td>
-													<td style="width: 2%;">　</td>
-													<td style="width: 2%;">용</td>
-													<td style="width: 2%;"></td>
-													<td><input type="text" name="price12" style="height: 100px;"></td>
-													<td style="width: 0.5%"></td>
-													<td><input type="text" name="price22" style="height: 100px;"></td>
-												</tr>
-												<tr>
-													<td colspan="6" style="height : 20px"></td>
+													<td colspan="6" style="height: 20px"></td>
 												</tr>
 												<tr>
 													<td style="width: 2%;">상</td>
@@ -146,10 +145,11 @@
 													<td style="width: 2%;">내</td>
 													<td style="width: 2%;">용</td>
 													<td style="width: 2%;"></td>
-													<td colspan="3"><input type="text" name="title" style="height: 200px;"></td>
+													<td><input type="text" id="content" name="content"
+														style="height: 200px;"></td>
 												</tr>
 												<tr>
-													<td colspan="6" style="height : 20px"></td>
+													<td colspan="6" style="height: 20px"></td>
 												</tr>
 												<tr>
 													<td style="width: 2%;">파</td>
@@ -157,33 +157,26 @@
 													<td style="width: 2%;">첨</td>
 													<td style="width: 2%;">부</td>
 													<td style="width: 2%;"></td>
-													<td colspan="3"><input type="text" name="img"></td>
+													<td><input type="file" id="img" name="img"></td>
 												</tr>
 												<tr>
-													<td colspan="6" style="height : 50px"></td>
+													<td style="height: 70px"></td>
 												</tr>
 												<tr>
-													<td colspan="8">
-														<div align="center">
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															<button class="button style1">수정</button>
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															<input type="reset" class="button style1">
+													<td colspan="6">
+														<div align="center" style="width: 110%">
+															<input type="submit" value="입력" class="button style1"
+																onclick="return checkEmpty()"> <input
+																type="reset" class="button style1">
 														</div>
 													</td>
 												</tr>
 											</table>
-											</form>
-										</div>
+										</form>
 									</div>
+								</div>
 							</article>
 						</div>
-
 					</div>
 					<div class="col-4 col-12-medium">
 
@@ -210,187 +203,10 @@
 								</ul>
 								<br> <a href="#" class="button style1">주문하기</a>
 							</section>
-							<section class="box">
-								<header>
-									<h2>그 외 링크</h2>
-								</header>
-								<ul class="style3">
-									<li><a href="#">Nulla iaculis egestas varius</a></li>
-									<li><a href="#">Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
-									<li><a href="#">Turpis vel leo accumsan aliquet</a></li>
-									<li><a href="#">Dapibus mi fermentum fusce non</a></li>
-									<li><a href="#">Arcu laoreet sapien tempus</a></li>
-									<li><a href="#">Nulla iaculis egestas varius</a></li>
-									<li><a href="#">Augue massa feugiat quam pretium</a></li>
-									<li><a href="#">Orci sem vel libero cras nisi odio</a></li>
-									<li><a href="#">Sed hendrerit massa nam mattis</a></li>
-								</ul>
-							</section>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</section>
-
-		<!-- Highlights -->
-		<section id="highlights" class="wrapper style3">
-			<div class="title">The Endorsements</div>
-			<div class="container">
-				<div class="row aln-center">
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img
-								src="../images/pic02.jpg" alt="" /></a>
-							<h3>
-								<a href="#">Aliquam diam consequat</a>
-							</h3>
-							<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-								ante, dolor aliquet sit amet vulputate mattis amet laoreet
-								lorem.</p>
-							<ul class="actions">
-								<li><a href="#" class="button style1">Learn More</a></li>
-							</ul>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img
-								src="../images/pic03.jpg" alt="" /></a>
-							<h3>
-								<a href="#">Nisl adipiscing sed lorem</a>
-							</h3>
-							<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-								ante, dolor aliquet sit amet vulputate mattis amet laoreet
-								lorem.</p>
-							<ul class="actions">
-								<li><a href="#" class="button style1">Learn More</a></li>
-							</ul>
-						</section>
-					</div>
-					<div class="col-4 col-12-medium">
-						<section class="highlight">
-							<a href="#" class="image featured"><img
-								src="../images/pic04.jpg" alt="" /></a>
-							<h3>
-								<a href="#">Mattis tempus lorem</a>
-							</h3>
-							<p>Eget mattis at, laoreet vel amet sed velit aliquam diam
-								ante, dolor aliquet sit amet vulputate mattis amet laoreet
-								lorem.</p>
-							<ul class="actions">
-								<li><a href="#" class="button style1">Learn More</a></li>
-							</ul>
-						</section>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Footer -->
-		<section id="footer" class="wrapper">
-			<div class="title">The Rest Of It</div>
-			<div class="container">
-				<header class="style1">
-					<h2>Ipsum sapien elementum portitor?</h2>
-					<p>
-						Sed turpis tortor, tincidunt sed ornare in metus porttitor mollis
-						nunc in aliquet.<br /> Nam pharetra laoreet imperdiet volutpat
-						etiam feugiat.
-					</p>
-				</header>
-				<div class="row">
-					<div class="col-6 col-12-medium">
-
-						<!-- Contact Form -->
-						<section>
-							<form method="post" action="#">
-								<div class="row gtr-50">
-									<div class="col-6 col-12-small">
-										<input type="text" name="name" id="contact-name"
-											placeholder="Name" />
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="text" name="email" id="contact-email"
-											placeholder="Email" />
-									</div>
-									<div class="col-12">
-										<textarea name="message" id="contact-message"
-											placeholder="Message" rows="4"></textarea>
-									</div>
-									<div class="col-12">
-										<ul class="actions">
-											<li><input type="submit" class="style1" value="Send" /></li>
-											<li><input type="reset" class="style2" value="Reset" /></li>
-										</ul>
-									</div>
-								</div>
-							</form>
-						</section>
-
-					</div>
-					<div class="col-6 col-12-medium">
-
-						<!-- Contact -->
-						<section class="feature-list small">
-							<div class="row">
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-home">Mailing Address</h3>
-										<p>
-											Untitled Corp<br /> 1234 Somewhere Rd<br /> Nashville, TN
-											00000
-										</p>
-									</section>
-								</div>
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-comment">Social</h3>
-										<p>
-											<a href="#">@untitled-corp</a><br /> <a href="#">linkedin.com/untitled</a><br />
-											<a href="#">facebook.com/untitled</a>
-										</p>
-									</section>
-								</div>
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-envelope">Email</h3>
-										<p>
-											<a href="#">info@untitled.tld</a>
-										</p>
-									</section>
-								</div>
-								<div class="col-6 col-12-small">
-									<section>
-										<h3 class="icon fa-phone">Phone</h3>
-										<p>(000) 555-0000</p>
-									</section>
-								</div>
-							</div>
-						</section>
-
-					</div>
-				</div>
-				<div id="copyright">
-					<ul>
-						<li>&copy; Untitled.</li>
-						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
-
-	</div>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.dropotron.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
 </body>
 </html>
