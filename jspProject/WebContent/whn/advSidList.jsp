@@ -40,10 +40,10 @@
 		<section id="header" class="wrapper">
 
 			<!-- Logo -->
+						<!-- Logo -->
 			<div id="logo">
-				<h1>
-					<a href="index.html">내 판매글 목록</a>
-				</h1>
+				<h1><a href="#">판매글 리스트</a></h1>
+				<p><%=session.getAttribute("id") %>님의 판매글 목록입니다!</p>
 			</div>
 
 			<!-- Nav -->
@@ -81,10 +81,9 @@
 				<div id="content">
 					<article class="box post">
 						<header class="style1">
-							<h2>
-								<%=session.getAttribute("id")%>님의 판매글 리스트<br class="mobile-hide" />
-								<a href="advSidList.jsp?nowPage=1">판매글 쓰기</a>
-							</h2>
+							<p align="right">
+								<a href="saleEditor_insert.jsp">판매글 쓰기</a>
+							</p>
 						</header>
 						<div class="row gtr-150">
 							<%

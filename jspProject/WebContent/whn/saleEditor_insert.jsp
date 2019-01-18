@@ -1,3 +1,13 @@
+<%@page import="bean.CartDTO"%>
+<%@page import="bean.CartDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="bean.ReviewDTO"%>
+<%@page import="bean.ReviewDAO"%>
+<%@page import="bean.SalesDAO"%>
+<%@page import="bean.MemberDTO"%>
+<%@page import="bean.MemberDAO"%>
+<%@page import="bean.AdvDTO"%>
+<%@page import="bean.AdvDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -64,13 +74,46 @@
 </script>
 </head>
 <body class="right-sidebar is-preload">
+	<%
+	//판매자 아이디 - 로그인한 판매자 본인 아이디 받아옴 		
+	String sid = (String)session.getAttribute("id");
+	
+	//네임카드에 올릴 판매자 정보가 필요해서 호출함
+	MemberDAO mdao = new MemberDAO();
+	MemberDTO mdto = null; 
+	
+	//결제여부가 확인되면 구매자에게 판매지 이메일을 네임카드 위에 출력
+	SalesDAO sdao = new SalesDAO();
+	
+	//리뷰
+ 	ReviewDAO rdao = new ReviewDAO();
+	ReviewDTO rdto = null;
+	//판매자 아이디에 해당하는 리뷰 개수
+	ArrayList<ReviewDTO> list = rdao.selectSidReview(sid);
+	int count = list.size();
+	
+	//찜하기
+	CartDAO cdao = new CartDAO();
+	CartDTO cdto = null;
+	
+	//Sales테이블의 결제 개수가 Review테이블의 결제 개수보다 많을 경우만 '리뷰작성'버튼이 보임	
+	//한 구매자가 한 판매자의 상품을 결제한 갯수만큼 리뷰를 쓸 수 있음
+	//Sales테이블의 결제 개수가 1회 이상일 경우 판매자의 아이디(이메일)을 출력해줌
+	//ckS : Sales 테이블 체크, ckR : 리뷰 테이블 체크
+	int ckS = sdao.selectCheckPayment(sid,(String)session.getAttribute("id"));
+	int ckR = rdao.selectCheckPayment(sid,(String)session.getAttribute("id"));
+	
+	%>
 	<div id="page-wrapper">
 
 		<!-- Header -->
 		<section id="header" class="wrapper">
 
 			<!-- Logo -->
-			<div id="logo"></div>
+			<div id="logo">
+				<h1><a href="#">판매글 페이지</a></h1>
+				<p><%=sid %>님의 판매글 입력페이지입니다!</p>
+			</div>
 
 			<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
 
@@ -179,31 +222,6 @@
 						</div>
 					</div>
 					<div class="col-4 col-12-medium">
-
-						<!-- Sidebar -->
-						<div id="sidebar">
-							<section class="box">
-								<header>
-									<h2>네임카드</h2>
-									<a href="#" id="heart"></a>
-								</header>
-							</section>
-							<section class="box">
-								<ul class="style2">
-									<li>
-										<article class="box post-excerpt">
-											<a href="#" class="image left"><img
-												src="images/pic08.jpg" alt="" /></a>
-											<h3>
-												<a href="#">닉네임</a>
-											</h3>
-											<p>닉네임</p>
-										</article>
-									</li>
-								</ul>
-								<br> <a href="#" class="button style1">주문하기</a>
-							</section>
-						</div>
 					</div>
 				</div>
 			</div>

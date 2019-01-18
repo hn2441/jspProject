@@ -36,7 +36,10 @@
 		<section id="header" class="wrapper">
 
 			<!-- Logo -->
-			<div id="logo"></div>
+			<div id="logo">
+				<h1><a href="index.html">찜하기 페이지</a></h1>
+				<p><%=session.getAttribute("id") %>님의 찜하기 페이지입니다!</p>
+			</div>
 
 			<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
 
@@ -74,9 +77,6 @@
 				<div id="content">
 					<article class="box post">
 						<header class="style1">
-							<h2>
-								<%=session.getAttribute("id")%>님의 찜하기 내역<br class="mobile-hide" />
-							</h2>
 						</header>
 						<div class="row gtr-150">
 							<%

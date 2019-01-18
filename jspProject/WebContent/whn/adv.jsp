@@ -103,7 +103,10 @@
 		<section id="header" class="wrapper">
 
 			<!-- Logo -->
-			<div id="logo"></div>
+			<div id="logo">
+				<h1><a href="#">판매글 페이지</a></h1>
+				<p><%=sid %>님의 판매글 페이지입니다!</p>
+			</div>
 
 			<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
 
