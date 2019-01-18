@@ -1,4 +1,4 @@
-<%@page import="bean.SalesDTO"%>
+﻿<%@page import="bean.SalesDTO"%>
 <%@page import="bean.SalesDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Locale"%>
@@ -30,10 +30,7 @@
 			response.sendRedirect("bbsShow.jsp");
 		}else{
 			//원래 페이지로 돌아감
-%>
-	원래 페이지로 돌아가야합니다! 민재씨한테 물어봐야해요!
-<%
-			response.sendRedirect("");
+			response.sendRedirect("BBS.jsp");
 		}
 	}
 
