@@ -122,7 +122,7 @@
 								<header class="style1"> </header>
 								<div class="row gtr-150">
 									<div class="col-6 col-12-small">
-										<form id="temp" method="post"
+										<form id="temp" method="post" enctype="multipart/form-data";
 											action="saleEditor_update_ok.jsp">
 											<table style="width: 200%">
 												<tr>
