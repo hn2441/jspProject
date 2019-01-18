@@ -10,7 +10,7 @@
 -->
 <html>
 <head>
-<title>장바구니</title>
+<title>판매글 리스트</title>
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -46,31 +46,31 @@
 				<p><%=session.getAttribute("id") %>님의 판매글 목록입니다!</p>
 			</div>
 
-			<!-- Nav -->
+			<!-- Nav: 사이트에서 주요한 네비게이션 역할을 하는 링크 그룹을 담을 때 사용 -->
 			<nav id="nav">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#">Dropdown</a>
-						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Magna veroeros</a></li>
-							<li><a href="#">Etiam nisl</a></li>
-							<li><a href="#">Sed consequat</a>
-								<ul>
-									<li><a href="#">Lorem dolor</a></li>
-									<li><a href="#">Amet consequat</a></li>
-									<li><a href="#">Magna phasellus</a></li>
-									<li><a href="#">Etiam nisl</a></li>
-									<li><a href="#">Sed feugiat</a></li>
-								</ul></li>
-							<li><a href="#">Nisl tempus</a></li>
-						</ul></li>
-					<li><a href="left-sidebar.html">Left Sidebar</a></li>
-					<li><a href="right-sidebar.html">Right Sidebar</a></li>
-					<li class="current"><a href="no-sidebar.html">No Sidebar</a></li>
+					<li class="current"><a href="main.jsp">홈</a></li>
+					<li><a href="idCheck.jsp?p=m">마이페이지</a></li>
+					<li><a href="idCheck.jsp?p=c">찜 목록</a></li>
+					<li><a href="googleMap.html">찾아 오시는 길</a></li>
+					<li><a href="FAQ.html">고객 센터</a></li>
+					<li>|</li>
+					<%
+		            /* 로그인한 세션 값 확인 */
+		               if(session.getAttribute("id") == null) {
+		            %>
+					<li><a href="loginPage.jsp">로그인</a></li>
+					<% 
+		               } else {
+		            %>
+					<li><a href="#"><%= session.getAttribute("id") %></a></li>
+					<li><a href="logout.jsp">로그아웃</a></li>
+					<%    
+		               } /* end 로그인한 세션 값 확인 */
+		            %>
 				</ul>
 			</nav>
-
+			<div></div>
 		</section>
 
 		<!-- Main -->
