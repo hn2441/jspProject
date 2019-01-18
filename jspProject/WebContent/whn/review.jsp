@@ -198,7 +198,6 @@ input[type="button"].style99:active, input[type="submit"].style99:active,
 
 		<!-- Main -->
 		<section id="main" class="wrapper style2">
-			<div class="title">Right Sidebar</div>
 			<div class="container">
 				<div class="row gtr-150">
 					<div class="col-8 col-12-medium">

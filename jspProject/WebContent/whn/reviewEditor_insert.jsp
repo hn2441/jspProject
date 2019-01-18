@@ -96,7 +96,6 @@ input[type="radio"] {
 
 		<!-- Main -->
 		<div id="main" class="wrapper style2">
-			<div class="title">No Sidebar</div>
 			<div class="container">
 
 				<!-- Content -->

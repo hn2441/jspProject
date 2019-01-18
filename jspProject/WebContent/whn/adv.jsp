@@ -135,7 +135,6 @@
 
 		<!-- Main -->
 		<section id="main" class="wrapper style2">
-			<div class="title">Right Sidebar</div>
 			<div class="container">
 				<div class="row gtr-150">
 					<div class="col-8 col-12-medium">
@@ -153,13 +152,14 @@
 										<%//판매글 
 										adto = adao.selectAdv(adno);
 										%>
-										<h2 name="title"><%=adto.getTitle() %></h2>
+										<h2 name="title" style="font-size: 25px"><%=adto.getTitle() %></h2>
 									</div>
 									<div class="row gtr-150"
 										style="height: 100px; font-size: 20px;">
 										<div class="col-6 col-12-small" style="padding: 3%;">
 											<section class="box">
-												<%=adto.getPrice() %>
+												<br><br>
+												최소 주문금액 : <%=adto.getPrice() %>원
 											</section>
 										</div>
 									</div>

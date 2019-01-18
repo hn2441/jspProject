@@ -27,7 +27,7 @@
 		int rs = sdao.insertSales(sdto);
 		//넘어가는 페이지 경로 수정 확인해야합니다.
 		if(rs == 1){
-			response.sendRedirect("bbsShow.jsp");
+			response.sendRedirect("BBSinput.jsp");
 		}else{
 			//원래 페이지로 돌아감
 			response.sendRedirect("BBS.jsp");
