@@ -136,10 +136,19 @@
 					<%	//------------------------------------게시판 답글 부분 값-------------------------------------------------
 						BBSDAO2 dao2 = new BBSDAO2();
 						BBSDTO2 dto2 = dao2.select(num);
+						//int num2 = Integer.parseInt(request.getParameter("num"));
 						String title2 = request.getParameter("title");
 						String write2 = request.getParameter("write");
+						dto2 = dao2.select(num);
+						
+						
 						//title2 = URLDecoder.decode(title2,"UTF-8");
-						//write2 = URLDecoder.decode(write2,"UTF-8");
+						if(dto2.getWrite() == null) {
+							write2 = " ";
+							dto2.setDate(" ");
+						}else{
+						write2 = URLDecoder.decode(dto2.getWrite(),"UTF-8");
+						}
 						
 					%>
 					<table class = "bbs">
@@ -161,10 +170,10 @@
 					</tr>
 					<tr>
 						<td style ="width: 20%;">내용</td>
-						<td colspan="5" ><%=write2%></td>
+						<td colspan="5"><%= write2 %></td>
 					</tr>
 					</table>
-					<button type = "button" onclick="location.href='BBS.jsp' ">목록</button>
+					<button type = "button" onclick="location.href='BBS.jsp?write2=<%= write2 %>'" >목록</button>
 					<button type = "button" onclick="answer();">답글</button>
 					<button type = "button" onclick="update();">수정</button>
 					</div>			

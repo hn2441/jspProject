@@ -1,8 +1,10 @@
+<%@page import="bean.BBSDTO2"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.BBSDTO"%>
 <%@page import="bean.BBSDAO"%>
+<%@page import="bean.BBSDAO2"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -33,7 +35,8 @@
 					id2 = '<%=(String)session.getAttribute("id2") %>';
 					var price = prompt("가격을 입력하세요");
 					alert("글 작성을 시작합니다.");
-					location.href = "payment.jsp?id2=" + id2 +"&price=" + price;
+					location.href = "BBSinput.jsp?id=" + id;
+					//location.href = "payment.jsp?id2=" + id2 +"&price=" + price; -------한나씨 페이지로 값 넘김.
 				}else if('<%=(String)session.getAttribute("id") %>' != null){
 					id2 = '<%=(String)session.getAttribute("id") %>';
 					alert("글 작성을 시작합니다.");
@@ -110,20 +113,23 @@
 						<%	
 							//게시판 메인에 게시글 목록띄우는 것
 							response.setHeader("Refresh", "10");
+							BBSDAO2 dao2 = new BBSDAO2();
 							ArrayList<BBSDTO> list = dao.selectAll();
 							BBSDTO dto = null;
+							BBSDTO2 dto2 = null;
 							
 							for(int i = 0; i < list.size(); i++){
 								dto = list.get(i);
+								dto2 = dao2.select(dto.getNum());
+								dto2.setNum(dto.getNum());
 						%>
 							<tr>
 								<td><%= dto.getNum()%></td>
-								<td><a href= "bbsShow.jsp?title=<%= dto.getTitle()%>"><%= dto.getTitle()%></a></td>
+								<td><a href= "bbsShow.jsp?title=<%= dto.getTitle()%>&num=<%= dto2.getNum() %>"><%= dto.getTitle()%></a></td>
 								<td><%= dto.getId()%></td>
 								<td><%= dto.getDate()%></td>
 								<td><%= dto.getView()%></td>
 							</tr>
-						
 						<%		
 							}
 						%>
