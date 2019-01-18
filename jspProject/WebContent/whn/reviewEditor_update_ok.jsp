@@ -41,7 +41,7 @@
 		
 		//DB동작
  		ReviewDAO rdao = new ReviewDAO();
-		ReviewDTO rdto = new ReviewDTO(mid,sid,adno,content,starsc);
+		ReviewDTO rdto = new ReviewDTO(mid,sid,adno,content,starsc,"");
 		rdto.setNo(rvno);
 		
 		int rs = rdao.updateReview(rdto);

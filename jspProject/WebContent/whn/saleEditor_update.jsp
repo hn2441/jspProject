@@ -14,7 +14,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/main.css" />
 <style type="text/css">
 #heart {
 	position: relative;
@@ -46,7 +46,7 @@
 }
 </style>
 
-<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/main.css" />
 <script type="text/javascript">
 	function checkEmpty(){
 		var title = document.getElementById("title").value;
@@ -208,7 +208,7 @@
 									<li>
 										<article class="box post-excerpt">
 											<a href="#" class="image left"><img
-												src="../images/pic08.jpg" alt="" /></a>
+												src="images/pic08.jpg" alt="" /></a>
 											<h3>
 												<a href="#">닉네임</a>
 											</h3>
