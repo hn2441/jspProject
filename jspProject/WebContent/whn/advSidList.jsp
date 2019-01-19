@@ -119,14 +119,12 @@
 					</article>
 					<div align="center"
 						style="font-size: 18px; padding: 5%; height: 10%'">
-						<%
-							//지금페이지가 1이 아닐경우만 '이전'을 띄워주고, 지금 페이지가 마지막 페이지가 아닐 경우에만 '다음'을 띄워줌
+						<%	//지금페이지가 1이 아닐경우만 '이전'을 띄워주고, 
+							//지금 페이지가 마지막 페이지가 아닐 경우에만 '다음'을 띄워줌
 							if (nowPage > 1) {
 						%>
 						<a href="advSidList.jsp?nowPage=<%=nowPage - 1%>">이전</a>
-						<%
-							}
-						%>
+						<%}%>
 						&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 						<%=nowPage%>
 						&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -134,9 +132,7 @@
 							if (nowPage < pageCount) {
 						%>
 						<a href="advSidList.jsp?nowPage=<%=nowPage + 1%>">다음</a>
-						<%
-							}
-						%>
+						<%}%>
 					</div>
 
 				</div>
